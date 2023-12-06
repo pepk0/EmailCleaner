@@ -11,5 +11,6 @@ def main() -> None:
     store_mail_count(service, emails)
     # batch_delete(service, "email_sender_data.json")
 
+
 if __name__ == "__main__":
     main()
