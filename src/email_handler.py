@@ -60,7 +60,7 @@ def batch_delete(service, json_file_path: str) -> None:
         all_messages_from_user = list_emails(service, query=mail_id)
         if all_messages_from_user:
             if len(all_messages_from_user) > 1000:
-                # Gmail API doesn't allow more then 1k deletes so we add it back
+                # Gmail API doesn't allow more then 1k deletes so we requeue it
                 all_messages_from_user = all_messages_from_user[:1000]
                 all_messages.append(mail_id)
             service.users().messages().batchDelete(
