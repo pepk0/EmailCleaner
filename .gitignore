@@ -127,6 +127,12 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+setings.json
+credentials.json
+token.json
+email_sender_data.json
+.vscode
+
 
 # Spyder project settings
 .spyderproject
