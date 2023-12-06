@@ -49,16 +49,18 @@ def store_mail_count(service, messages: list) -> None:
 def batch_delete(service, json_file_path: str) -> None:
     try:
         with open(json_file_path, "r") as email_json:
-            all_messages = [mail_id for mail_id in json.load(email_json).keys()]
+            all_messages = [
+                mail_id for mail_id in json.load(email_json).keys()]
     except FileNotFoundError:
         print("missing json file")
         return
-    
+
     while all_messages:
         mail_id = all_messages.pop()
         all_messages_from_user = list_emails(service, query=mail_id)
         if all_messages_from_user:
             if len(all_messages_from_user) > 1000:
+                # Gmail API doesn't allow more then 1k deletes so we add it back
                 all_messages_from_user = all_messages_from_user[:1000]
                 all_messages.append(mail_id)
             service.users().messages().batchDelete(

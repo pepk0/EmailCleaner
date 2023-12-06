@@ -8,8 +8,8 @@ def main():
     service = gmail_authenticate()
 
     emails = list_emails(service)
-    # store_mail_count(service, emails)
-    batch_delete(service, "email_sender_data.json")
+    store_mail_count(service, emails)
+    # batch_delete(service, "email_sender_data.json")
 
 if __name__ == "__main__":
     main()
