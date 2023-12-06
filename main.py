@@ -2,7 +2,7 @@ from src.set_connect import gmail_authenticate
 from src.email_handler import list_emails, store_mail_count, get_name_of_sender, batch_delete
 
 
-def main():
+def main() -> None:
 
     # connection to Gmail API service
     service = gmail_authenticate()
