@@ -76,5 +76,8 @@ def batch_delete(service, json_file_path: str) -> None:
                 # Gmail API doesn't allow more then 1k deletes so we requeue it
                 all_messages_from_user = all_messages_from_user[:1000]
                 all_messages.append(mail_id)
-            service.users().messages().batchDelete(
-                userId="me", body={"ids": all_messages_from_user}).execute()
+            try:
+                service.users().messages().batchDelete(
+                    userId="me", body={"ids": all_messages_from_user}).execute()
+            except HttpError:
+                continue
