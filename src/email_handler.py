@@ -48,18 +48,12 @@ def list_emails(service, query=None) -> list:
 
 
 def store_mail_count(service, messages: list) -> None:
-    total_email_messages = len(messages)
     mails_as_dict = {}
-    for email_number, email_id in enumerate(messages, 1):
+    for email_id in messages:
         sender = get_name_of_sender(email_id, service)
-
-        # simple CLI text to track progress
-        print(f"{email_number}/{total_email_messages} -- {sender}")
-
         if sender not in mails_as_dict:
             mails_as_dict[sender] = 0
         mails_as_dict[sender] += 1
-
     # save data as a json
     with open("email_sender_data.json", "w", encoding="utf-8") as json_file:
         json.dump(mails_as_dict, json_file, indent=4)
