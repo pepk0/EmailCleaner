@@ -16,7 +16,6 @@ def get_name_of_sender(mai_id: str, service):
             userId="me", id=mai_id, format="full").execute()
     except HttpError or AttributeError:
         return "Unknown"
-
     payload = sender.get("payload")
     headers = payload.get("headers")
     for header in headers:
