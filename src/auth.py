@@ -4,13 +4,15 @@ import pickle
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+from googleapiclient.errors import HttpError
+
 
 # Request all access (permission to read/send/receive emails, manage the inbox, and more)
 SCOPES = ['https://mail.google.com/']
 PERSONAL_EMAIL = 'popovstz@gmail.com'
 
 
-def gmail_authenticate():
+def gmail_authenticate() -> object:
     creds = None
     # the file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first time
@@ -30,5 +32,7 @@ def gmail_authenticate():
         # save the credentials for the next run
         with open("token.pickle", "wb") as token:
             pickle.dump(creds, token)
-    
-    return build('gmail', 'v1', credentials=creds)
+    try:
+        return build('gmail', 'v1', credentials=creds)
+    except HttpError or FileNotFoundError:
+        return False

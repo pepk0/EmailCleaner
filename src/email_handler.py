@@ -1,9 +1,22 @@
 import json
+from googleapiclient.errors import HttpError
+
+
+def get_user_email(service) -> str:
+    try:
+        user_email_address = service.users().getProfile(userId="me").execute()
+        return user_email_address.get("emailAddress")
+    except HttpError and AttributeError:
+        return "Unknown"
 
 
 def get_name_of_sender(mai_id: str, service):
-    sender = service.users().messages().get(
-        userId="me", id=mai_id, format="full").execute()
+    try:
+        sender = service.users().messages().get(
+            userId="me", id=mai_id, format="full").execute()
+    except HttpError or AttributeError:
+        return "Unknown"
+    
     payload = sender.get("payload")
     headers = payload.get("headers")
     for header in headers:
@@ -13,18 +26,24 @@ def get_name_of_sender(mai_id: str, service):
 
 def list_emails(service, query=None) -> list:
     messages = []
-    result = service.users().messages().list(userId="me", q=query).execute()
-
+    try:
+        result = service.users().messages().list(userId="me", q=query).execute()
+    except HttpError or AttributeError:
+        return [email["id"] for email in messages]
+    
     if "messages" in result:
         messages.extend(result["messages"])
 
     while "nextPageToken" in result:
         page_token = result["nextPageToken"]
-        result = service.users().messages().list(
-            userId="me", q=query, pageToken=page_token).execute()
+        try:
+            result = service.users().messages().list(
+                userId="me", q=query, pageToken=page_token).execute()
+        except HttpError:
+            return [email["id"] for email in messages]
         if "messages" in result:
             messages.extend(result["messages"])
-
+    
     return [email["id"] for email in messages]
 
 
