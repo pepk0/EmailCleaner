@@ -44,7 +44,7 @@ def list_emails(service, query=None) -> list:
     return [email["id"] for email in messages]
 
 
-def store_mail_count(service, messages: list) -> None:
+def store_mail_count(service, messages: list) -> list:
     mails_as_dict = {}
     for email_id in messages:
         sender = get_name_of_sender(email_id, service)
@@ -54,7 +54,7 @@ def store_mail_count(service, messages: list) -> None:
     # save data as a json
     with open("email_sender_data.json", "w", encoding="utf-8") as json_file:
         json.dump(mails_as_dict, json_file, indent=4)
-
+    return [mail_name for mail_name in mails_as_dict.keys()]
 
 def batch_delete(service, json_file_path: str) -> None:
     try:
