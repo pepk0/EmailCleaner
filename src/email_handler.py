@@ -30,10 +30,8 @@ def list_emails(service, query=None) -> list:
         result = service.users().messages().list(userId="me", q=query).execute()
     except HttpError or AttributeError:
         return [email["id"] for email in messages]
-
     if "messages" in result:
         messages.extend(result["messages"])
-
     while "nextPageToken" in result:
         page_token = result["nextPageToken"]
         try:
@@ -66,7 +64,6 @@ def batch_delete(service, json_file_path: str) -> None:
     except FileNotFoundError:
         print("missing json file")
         return
-
     while messages:
         mail_id = messages.pop()
         all_messages_from_user = list_emails(service, query=mail_id)
