@@ -56,6 +56,7 @@ def store_mail_count(service, messages: list) -> list:
         json.dump(mails_as_dict, json_file, indent=4)
     return [mail_name for mail_name in mails_as_dict.keys()]
 
+
 def batch_delete(service, json_file_path: str) -> None:
     try:
         with open(json_file_path, "r") as email_json:
