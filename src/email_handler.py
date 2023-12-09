@@ -10,6 +10,14 @@ def get_user_email(service) -> str:
         return "Unknown"
 
 
+def get_user_email_count(service) -> str:
+    try:
+        user_email_address = service.users().getProfile(userId="me").execute()
+        return user_email_address.get("messagesTotal")
+    except (HttpError, AttributeError):
+        return "0"
+
+
 def get_sender(mai_id: str, service):
     try:
         sender = service.users().messages().get(
@@ -58,23 +66,13 @@ def store_mail_count(service, messages: list) -> list:
     return [mail_name for mail_name in mails_as_dict.keys()]
 
 
-def batch_delete(service, json_file_path: str) -> None:
-    try:
-        with open(json_file_path, "r") as email_json:
-            messages = [mail_id for mail_id in json.load(email_json).keys()]
-    except FileNotFoundError:
-        print("missing json file")
-        return
+def batch_delete(service, mail_id: str) -> None:
+    messages = list_emails(service, mail_id)
     while messages:
-        mail_id = messages.pop()
-        all_messages_from_user = list_emails(service, query=mail_id)
-        if all_messages_from_user:
-            if len(all_messages_from_user) > 1000:
-                # Gmail API doesn't allow more then 1k deletes so we requeue it
-                all_messages_from_user = all_messages_from_user[:1000]
-                messages.append(mail_id)
-            try:
-                service.users().messages().batchDelete(
-                    userId="me", body={"ids": all_messages_from_user}).execute()
-            except (HttpError, AttributeError):
-                continue
+        to_delete = messages[:1000]
+        messages = messages[1000:]
+        try:
+            service.users().messages().batchDelete(
+                userId="me", body={"ids": to_delete}).execute()
+        except (HttpError, AttributeError):
+            continue
