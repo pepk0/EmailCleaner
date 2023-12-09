@@ -41,7 +41,6 @@ class MainWindow(tk.Tk):
                 for email_id in self.list_mails:
                     if email_id not in excluded:
                         batch_delete(self.service, email_id)
-                        excluded.clear()
             else:
                 chosen_email = mail_choice.get()
                 if chosen_email not in choices:
@@ -69,7 +68,7 @@ class MainWindow(tk.Tk):
         choices = set([get_sender(id, self.service) for id in self.list_mails])
         mail_choice = tk.StringVar()
         delete_and_read_frame = tk.LabelFrame(
-            self, text="Delete or Read", font=(self.font, 15))
+            self, text="Delete or Read", font=(self.font, 15), borderwidth=5, border=5)
         get_mail = ttk.Combobox(
             delete_and_read_frame, textvariable=mail_choice, state="readonly",
             values=list(choices), width=42, font=(self.font, 14))
@@ -87,7 +86,7 @@ class MainWindow(tk.Tk):
         total_mail_count.grid(row=1, column=0)
 
         # delete frame placement
-        delete_and_read_frame.grid(row=1, column=0)
+        delete_and_read_frame.grid(row=1, column=0, pady=10)
         # inside delete frame placement
         get_mail.grid(row=0, column=0, columnspan=3)
         delete_button.grid(row=1, column=0)
