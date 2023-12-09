@@ -54,22 +54,20 @@ class MainWindow(tk.Tk):
             get_mail['values'] = list(choices)
             get_mail.set("Success!")
 
-        # connection status message label and user display field
+        # connection status message and mail count field
         status = tk.LabelFrame(self, text="Status:",
                                borderwidth=4, font=(self.font, 15))
-        total_mail_count = tk.Label(
-            status,  text=f"Total mail: {self.mail_count}")
+        total_mail_count = tk.Label(status, text=f"Emails: {self.mail_count}")
         status_text = tk.Label(
             status, text=f"Connected as: {self.user}", font=(self.font, 12))
         if not self.service:
             status_text = tk.Label(
                 status, text="Offline", font=(self.font, 12))
 
-        # deletion and read mail section:
+        # deletion and read mail section filed
         excluded = []
         choices = set([get_sender(id, self.service) for id in self.list_mails])
         mail_choice = tk.StringVar()
-
         delete_and_read_frame = tk.LabelFrame(
             self, text="Delete or Read", font=(self.font, 15))
         get_mail = ttk.Combobox(
@@ -78,18 +76,19 @@ class MainWindow(tk.Tk):
         delete_button = ttk.Button(
             delete_and_read_frame, text="Delete", width=15, command=delete)
         exclude_button = ttk.Button(delete_and_read_frame,
-                                text="Exclude", width=15, command=add_excluded)
-        clear_button = ttk.Button(delete_and_read_frame, text="Clear Added",
+                                    text="Exclude", width=15, command=add_excluded)
+        clear_button = ttk.Button(delete_and_read_frame, text="Clear Excluded",
                                   width=15, command=clear_choice)
 
-        # placement of widgets
-        # status and info
+        # status and info placement
         status.grid(row=0, column=0)
+        # inside status frame placement
         status_text.grid(row=0, column=0,)
-        total_mail_count.grid(row=1, column=0, columnspan=2)
+        total_mail_count.grid(row=1, column=0)
 
-        # mail manipulation
+        # delete frame placement
         delete_and_read_frame.grid(row=1, column=0)
+        # inside delete frame placement
         get_mail.grid(row=0, column=0, columnspan=3)
         delete_button.grid(row=1, column=0)
         exclude_button.grid(row=1, column=1)
