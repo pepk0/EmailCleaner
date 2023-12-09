@@ -18,28 +18,35 @@ class MainWindow(tk.Tk):
         self.mail_count = len(self.list_mails)
         self.font = "Helvetica"
 
-        def add_to_delete() -> None:
+        def add_excluded() -> None:
             chosen_email = mail_choice.get()
-            to_delete.append(chosen_email)
-            choices.remove(chosen_email)
-            get_mail['values'] = list(choices)
-            get_mail.set(f"Success! Pending Deletion {len(to_delete)}")
-            print(to_delete)
+            get_mail.set("None selected!")
+            if chosen_email in choices:
+                excluded.append(chosen_email)
+                choices.remove(chosen_email)
+                get_mail['values'] = list(choices)
+                get_mail.set(f"Success! Excluded mails {len(excluded)}")
+                print(excluded)
 
         def clear_choice() -> None:
-            for mail in to_delete:
+            for mail in excluded:
                 choices.add(mail)
-            to_delete.clear()
+            excluded.clear()
             get_mail['values'] = list(choices)
-            get_mail.set(f"List cleared! Pending Deletion {len(to_delete)}")
-            print(to_delete)
+            get_mail.set(f"List cleared! Excluded {len(excluded)}")
+            print(excluded)
 
-        def read_delete() -> None:
-            if to_delete:
-                for email_id in to_delete:
-                    batch_delete(self.service, email_id)
+        def delete() -> None:
+            if excluded:
+                for email_id in self.list_mails:
+                    if email_id not in excluded:
+                        batch_delete(self.service, email_id)
+                        excluded.clear()
             else:
                 chosen_email = mail_choice.get()
+                if chosen_email not in choices:
+                    get_mail.set("None selected!")
+                    return
                 batch_delete(self.service, chosen_email)
                 choices.remove(chosen_email)
             total_mail_count["text"] = (
@@ -59,7 +66,7 @@ class MainWindow(tk.Tk):
                 status, text="Offline", font=(self.font, 12))
 
         # deletion and read mail section:
-        to_delete = []
+        excluded = []
         choices = set([get_sender(id, self.service) for id in self.list_mails])
         mail_choice = tk.StringVar()
 
@@ -69,9 +76,9 @@ class MainWindow(tk.Tk):
             delete_and_read_frame, textvariable=mail_choice, state="readonly",
             values=list(choices), width=42, font=(self.font, 14))
         delete_button = ttk.Button(
-            delete_and_read_frame, text="Delete", width=15, command=read_delete)
-        add_button = ttk.Button(delete_and_read_frame,
-                                text="Add", width=15, command=add_to_delete)
+            delete_and_read_frame, text="Delete", width=15, command=delete)
+        exclude_button = ttk.Button(delete_and_read_frame,
+                                text="Exclude", width=15, command=add_excluded)
         clear_button = ttk.Button(delete_and_read_frame, text="Clear Added",
                                   width=15, command=clear_choice)
 
@@ -85,5 +92,5 @@ class MainWindow(tk.Tk):
         delete_and_read_frame.grid(row=1, column=0)
         get_mail.grid(row=0, column=0, columnspan=3)
         delete_button.grid(row=1, column=0)
-        add_button.grid(row=1, column=1)
+        exclude_button.grid(row=1, column=1)
         clear_button.grid(row=1, column=2)
