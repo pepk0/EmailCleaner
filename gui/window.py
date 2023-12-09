@@ -49,7 +49,7 @@ class MainWindow(tk.Tk):
                 batch_delete(self.service, chosen_email)
                 choices.remove(chosen_email)
             total_mail_count["text"] = (
-                f"Total mail: {get_user_email_count(self.service)}")
+                f"Emails: {get_user_email_count(self.service)}")
             get_mail['values'] = list(choices)
             get_mail.set("Success!")
 
