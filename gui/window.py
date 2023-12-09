@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 
 from src.auth import gmail_authenticate
-from src.email_handler import get_user_email
+from src.email_handler import get_sender, get_user_email, list_emails
 
 
 class MainWindow(tk.Tk):
@@ -12,21 +12,36 @@ class MainWindow(tk.Tk):
         self.geometry("800x300")
         self.resizable(False, False)
         self.service = gmail_authenticate()
-        self.user = get_user_email(self.service)
         self.connection_status = bool(self.service)
+        self.user = get_user_email(self.service)
+        self.list_mails = list_emails(self.service)
+        self.mail_count = len(self.list_mails)
 
         # connection status message label and user display field
-        status_label = tk.Label(text="Status:", font=("Helvetica", 18))
-        status = tk.Label(text="Offline", fg="Red", font=("Helvetica", 18))
-        user_welcome = tk.Label(
-            text=f"User: {self.user}", font=("Helvetica", 18))
-        if self.connection_status:
-            status = tk.Label(text="Connected", fg="Green",
-                            font=("Helvetica", 18))
-            user_welcome = tk.Label(text=f"User: {self.user}",
-                                    font=("Helvetica", 18))
+        status = tk.LabelFrame(self, text="Status:",
+                               borderwidth=4, font=("Helvetica", 15))
+        status_text = tk.Label(
+            status, text=f"Connected as {self.user}", font=("Helvetica", 12))
+        if not self.service:
+            status_text = tk.Label(
+                status, text="Offline", font=("Helvetica", 12))
 
-        # placement of all the widgets
-        user_welcome.grid(row=0, column=0, padx=30)
-        status_label.grid(row=0, column=1)
-        status.grid(row=0, column=2)
+        # deletion and read mail section:
+        delete_and_read_frame = tk.LabelFrame(
+            self, text="Delete or Read", font=("Helvetica", 15))
+        mail_choice = tk.StringVar()
+        choices = set([get_sender(id, self.service) for id in self.list_mails])
+        get_mail = ttk.Combobox(
+            delete_and_read_frame, textvariable=mail_choice,
+            values=list(choices), width=34)
+        delete_button = ttk.Button(
+            delete_and_read_frame, text="Delete", width=17)
+        read_button = ttk.Button(delete_and_read_frame, text="Read", width=17)
+
+        # placement of widgets
+        status.grid(row=0, column=0)
+        status_text.grid(row=0, column=0, pady=10)
+        delete_and_read_frame.grid(row=1, column=0)
+        get_mail.grid(row=0, column=0, columnspan=2)
+        delete_button.grid(row=1, column=0)
+        read_button.grid(row=1, column=1)
