@@ -10,13 +10,13 @@ class MainWindow(tk.Tk):
         super().__init__()
         self.title("Pidgin")
         self.geometry("800x300")
+        self.font = "Helvetica"
         self.resizable(False, False)
         self.service = gmail_authenticate()
         self.connection_status = bool(self.service)
         self.user = get_user_email(self.service)
         self.list_mails = list_emails(self.service)
         self.mail_count = len(self.list_mails)
-        self.font = "Helvetica"
 
         def add_excluded() -> None:
             chosen_email = mail_choice.get()
