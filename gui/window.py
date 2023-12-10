@@ -90,7 +90,7 @@ class MainWindow(tk.Tk):
                                   width=10, command=clear_choice)
 
         # text filed for message displaying
-        message_filed = tk.Text(self, font=(self.font, 18), width=62)
+        message_filed = tk.Text(self, font=(self.font, 18), width=61)
 
         # status and info placement
         status.grid(row=0, column=0)
@@ -103,7 +103,7 @@ class MainWindow(tk.Tk):
         # inside delete frame placement
         get_mail.grid(row=0, column=0,  pady=7)
         delete_button.grid(row=0, column=1)
-        exclude_button.grid(row=0, column=2)
+        exclude_button.grid(row=0, column=2, padx=5)
         clear_button.grid(row=0, column=3)
 
         # text filed and message placement
