@@ -90,7 +90,7 @@ class MainWindow(tk.Tk):
             delete_frame, text="Clear Excluded", command=clear_choice)
 
         # text filed for message displaying
-        message_filed = tk.Text(self, font=(self.font, 18), width=61)
+        message_filed = tk.Text(self, font=(self.font, 15), width=72)
 
         # status and info placement
         status.grid(row=0, column=0)
