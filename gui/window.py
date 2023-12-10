@@ -61,7 +61,7 @@ class MainWindow(tk.Tk):
             # add the choices to the widget
             get_mail['values'] = list(choices)
             print_tw(message_filed,
-                     f"{deleted_mail} mails successfully removed", susses=True)
+                     f"{deleted_mail} emails successfully removed", susses=True)
 
         # connection status message and mail count field
         status = tk.Label()
