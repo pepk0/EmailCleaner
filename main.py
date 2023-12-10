@@ -1,6 +1,4 @@
 from gui.window import MainWindow
-from src.auth import gmail_authenticate
-from src.email_handler import get_user_email
 
 
 def main() -> None:
