@@ -84,8 +84,8 @@ class MainWindow(tk.Tk):
             values=list(choices), width=40, font=(self.font, 14))
         delete_button = ttk.Button(
             delete_frame, text="Delete", width=10, command=delete)
-        exclude_button = ttk.Button(delete_frame,
-                                    text="Exclude", width=10, command=add_excluded)
+        exclude_button = ttk.Button(delete_frame, text="Exclude",
+                                    width=10, command=add_excluded)
         clear_button = ttk.Button(delete_frame, text="Clear Excluded",
                                   width=10, command=clear_choice)
 
