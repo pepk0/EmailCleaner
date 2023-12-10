@@ -26,7 +26,8 @@ class MainWindow(tk.Tk):
                 excluded.append(chosen_email)
                 choices.remove(chosen_email)
                 get_mail['values'] = list(choices)
-                print_tw(message_filed, f"Excluded senders: {len(excluded)}")
+                print_tw(message_filed, f"Emails from: {chosen_email} "
+                         f"are now excluded\nExcluded senders: {len(excluded)}")
             else:
                 print_tw(message_filed, "None selected!", error=True)
 
@@ -38,27 +39,29 @@ class MainWindow(tk.Tk):
             print_tw(message_filed, f"Excluded list cleared!", susses=True)
 
         def delete() -> None:
+            deleted_mail = 0
             if excluded:
                 for email_id in choices:
                     if email_id not in excluded:
-                        batch_delete(self.service, email_id)
+                        deleted_mail += batch_delete(self.service, email_id)
                 # remove the deleted mail and replace it with the excluded
                 choices.clear()
                 for mail in excluded:
                     choices.add(mail)
                 excluded.clear()
             else:
+                get_mail.set(" ")
                 chosen_email = mail_choice.get()
                 if chosen_email not in choices:
                     print_tw(message_filed, "None selected!", error=True)
                     return
-                batch_delete(self.service, chosen_email)
+                deleted_mail = batch_delete(self.service, chosen_email)
                 choices.remove(chosen_email)
-                get_mail.set(" ")
             mail_count["text"] = f"Emails: {get_user_email_count(self.service)}"
             # add the choices to the widget
             get_mail['values'] = list(choices)
-            print_tw(message_filed, "Emails successfully removed", susses=True)
+            print_tw(message_filed,
+                     f"{deleted_mail} mails successfully removed", susses=True)
 
         # connection status message and mail count field
         status = tk.Label()
@@ -87,7 +90,7 @@ class MainWindow(tk.Tk):
                                   width=10, command=clear_choice)
 
         # text filed for message displaying
-        message_filed = tk.Text(self, font=(self.font, 20))
+        message_filed = tk.Text(self, font=(self.font, 18), width=62)
 
         # status and info placement
         status.grid(row=0, column=0)

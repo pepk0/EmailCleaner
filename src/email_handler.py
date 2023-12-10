@@ -66,7 +66,8 @@ def store_mail_count(service, messages: list) -> list:
     return [mail_name for mail_name in mails_as_dict.keys()]
 
 
-def batch_delete(service, mail_id: str) -> None:
+def batch_delete(service, mail_id: str) -> int:
+    deleted_messages = 0
     messages = list_emails(service, mail_id)
     while messages:
         to_delete = messages[:1000]
@@ -74,5 +75,7 @@ def batch_delete(service, mail_id: str) -> None:
         try:
             service.users().messages().batchDelete(
                 userId="me", body={"ids": to_delete}).execute()
+            deleted_messages += len(to_delete)
         except (HttpError, AttributeError):
             continue
+    return deleted_messages
