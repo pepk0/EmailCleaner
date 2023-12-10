@@ -18,7 +18,7 @@ def get_user_email_count(service) -> str:
         return "0"
 
 
-def get_sender(mai_id: str, service):
+def get_sender(service, mai_id: str):
     try:
         sender = service.users().messages().get(
             userId="me", id=mai_id, format="full").execute()
