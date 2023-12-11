@@ -24,7 +24,7 @@ class MainWindow(tk.Tk):
                 loaded_emails = store_mail_count(
                     self.service, self.list_mails, message_filed)
                 choices.extend([mail for mail in loaded_emails.keys()])
-                get_mail["values"] = choices           
+                get_mail["values"] = choices
 
         def add_excluded() -> None:
             chosen_email = mail_choice.get()
@@ -73,7 +73,8 @@ class MainWindow(tk.Tk):
         # connection status message and mail count field
         status = tk.Label()
         load_button = ttk.Button(
-            status, text="Load Emails", width=15, command=lambda: load_email(choices))
+            status, text="Load Emails",
+            width=15, command=lambda: load_email(choices))
         status_text = tk.Label(
             status, text=f"Connected as: {self.user}", font=(self.font, 12))
         mail_count = tk.Label(
@@ -85,6 +86,7 @@ class MainWindow(tk.Tk):
         # deletion and read mail section filed
         excluded = []
         choices = []
+        sender_count = {}
         mail_choice = tk.StringVar()
         delete_frame = tk.Label(self, text="Delete Emails", font=(
             self.font, 15), borderwidth=5, border=5)
