@@ -1,5 +1,7 @@
-import json
+import tkinter as tk
 from googleapiclient.errors import HttpError
+
+from gui.display_text import print_pbar, print_tw
 
 
 def get_user_email(service) -> str:
@@ -10,12 +12,13 @@ def get_user_email(service) -> str:
         return "Unknown"
 
 
-def get_user_email_count(service) -> str:
+def get_user_email_count(service) -> int:
+    count = 0
     try:
         user_email_address = service.users().getProfile(userId="me").execute()
         return user_email_address.get("messagesTotal")
     except (HttpError, AttributeError):
-        return "0"
+        return count
 
 
 def get_sender(service, mai_id: str):
@@ -53,18 +56,22 @@ def list_emails(service, query=None) -> list:
     return [email["id"] for email in messages]
 
 
-def store_mail_count(service, messages: list) -> list:
+def store_mail_count(service, list_mails: list, widget: tk.Text) -> dict:
     mails_as_dict = {}
-    for email_id in messages:
-        sender = get_sender(email_id, service)
-        if sender not in mails_as_dict:
-            mails_as_dict[sender] = 0
-        mails_as_dict[sender] += 1
-    # save data as a json
-    with open("email_sender_data.json", "w", encoding="utf-8") as json_file:
-        json.dump(mails_as_dict, json_file, indent=4)
-    return [mail_name for mail_name in mails_as_dict.keys()]
+    total_emails = len(list_mails)
+    for iteration, email in enumerate(list_mails, 1):
+        progress_bar = print_pbar(iteration, total_emails)
+        print_tw(widget, f"{progress_bar}")
+        widget.update()
+        email_sender = get_sender(service, email)
+        if email_sender not in mails_as_dict:
+            mails_as_dict[email_sender] = 0
+        mails_as_dict[email_sender] += 1
+    else:
+        print_tw(widget, "", susses=True, clear=False)
+    return mails_as_dict
 
+    
 
 def batch_delete(service, mail_id: str) -> int:
     deleted_messages = 0

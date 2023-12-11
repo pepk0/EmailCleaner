@@ -17,7 +17,14 @@ class MainWindow(tk.Tk):
         self.connection_status = bool(self.service)
         self.user = get_user_email(self.service)
         self.list_mails = list_emails(self.service)
-        self.mail_count = len(self.list_mails)
+        self.mail_count = get_user_email_count(self.service)
+
+        def load_email(choices: list) -> None:
+            if not choices:
+                loaded_emails = store_mail_count(
+                    self.service, self.list_mails, message_filed)
+                choices.extend([mail for mail in loaded_emails.keys()])
+                get_mail["values"] = choices           
 
         def add_excluded() -> None:
             chosen_email = mail_choice.get()
@@ -33,7 +40,7 @@ class MainWindow(tk.Tk):
 
         def clear_choice() -> None:
             for mail in excluded:
-                choices.add(mail)
+                choices.append(mail)
             excluded.clear()
             get_mail['values'] = list(choices)
             print_tw(message_filed, f"Excluded list cleared!", susses=True)
@@ -47,10 +54,9 @@ class MainWindow(tk.Tk):
                 # remove the deleted mail and replace it with the excluded
                 choices.clear()
                 for mail in excluded:
-                    choices.add(mail)
+                    choices.append(mail)
                 excluded.clear()
             else:
-                get_mail.set(" ")
                 chosen_email = mail_choice.get()
                 if chosen_email not in choices:
                     print_tw(message_filed, "None selected!", error=True)
@@ -59,12 +65,15 @@ class MainWindow(tk.Tk):
                 choices.remove(chosen_email)
             mail_count["text"] = f"Emails: {get_user_email_count(self.service)}"
             # add the choices to the widget
+            get_mail.set(" ")
             get_mail['values'] = list(choices)
             print_tw(message_filed,
                      f"{deleted_mail} emails successfully removed", susses=True)
 
         # connection status message and mail count field
         status = tk.Label()
+        load_button = ttk.Button(
+            status, text="Load Emails", width=15, command=lambda: load_email(choices))
         status_text = tk.Label(
             status, text=f"Connected as: {self.user}", font=(self.font, 12))
         mail_count = tk.Label(
@@ -75,7 +84,7 @@ class MainWindow(tk.Tk):
 
         # deletion and read mail section filed
         excluded = []
-        choices = set([get_sender(self.service, id) for id in self.list_mails])
+        choices = []
         mail_choice = tk.StringVar()
         delete_frame = tk.Label(self, text="Delete Emails", font=(
             self.font, 15), borderwidth=5, border=5)
@@ -97,6 +106,7 @@ class MainWindow(tk.Tk):
         # inside status frame placement
         status_text.grid(row=0, column=0)
         mail_count.grid(row=0, column=1, padx=50)
+        load_button.grid(row=0, column=2)
 
         # delete frame placement
         delete_frame.grid(row=1, column=0, pady=20)
