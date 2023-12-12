@@ -67,7 +67,8 @@ class MainWindow(tk.Tk):
             get_mail.set(" ")
             get_mail['values'] = list(choices)
             print_tw(message_filed,
-                     f"{deleted_mail} emails successfully removed", susses=True)
+                     f"{deleted_mail} emails, successfully removed!",
+                     susses=True)
 
         # connection status message and mail count field
         status = tk.Label(self)
@@ -99,7 +100,7 @@ class MainWindow(tk.Tk):
             delete_frame, text="Clear Excluded", command=clear_choice)
 
         # text filed for message displaying
-        message_filed = tk.Label(self, font=(self.font, 25))
+        message_filed = tk.Label(self, font=(self.font, 20), wraplength=750)
 
         # progress tracing label
         progress = tk.Label(self)
@@ -123,7 +124,7 @@ class MainWindow(tk.Tk):
         clear_button.grid(row=0, column=3)
 
         # message, errors and warnings field
-        message_filed.grid(row=2, column=0, columnspan=10)
+        message_filed.grid(row=2, column=0)
 
         # progress and state placement, containment label is
         # placed as the email counting loop is initiated

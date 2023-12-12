@@ -113,7 +113,7 @@ def load_user_emails(service, list_mails: list, progress_bar: ttk.Progressbar,
             mails_as_dict[email_sender] = 0
         mails_as_dict[email_sender] += 1
     parent_widget.grid_forget()
-    print_tw(output_field, "Successfully loaded mail senders", susses=True)
+    print_tw(output_field, "Successfully loaded senders!", susses=True)
     return mails_as_dict
 
 
