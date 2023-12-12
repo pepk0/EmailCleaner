@@ -21,8 +21,9 @@ class MainWindow(tk.Tk):
 
         def load_email(choices: list) -> None:
             if not choices:
-                loaded_emails = store_mail_count(
-                    self.service, self.list_mails, message_filed)
+                loaded_emails = load_user_emails(
+                    self.service, self.list_mails, progress_bar, progress_text,
+                    progress, message_filed)
                 choices.extend([mail for mail in loaded_emails.keys()])
                 get_mail["values"] = choices
 
@@ -39,8 +40,7 @@ class MainWindow(tk.Tk):
                 print_tw(message_filed, "None selected!", error=True)
 
         def clear_choice() -> None:
-            for mail in excluded:
-                choices.append(mail)
+            choices.extend(excluded)
             excluded.clear()
             get_mail['values'] = list(choices)
             print_tw(message_filed, f"Excluded list cleared!", susses=True)
@@ -53,8 +53,7 @@ class MainWindow(tk.Tk):
                         deleted_mail += batch_delete(self.service, email_id)
                 # remove the deleted mail and replace it with the excluded
                 choices.clear()
-                for mail in excluded:
-                    choices.append(mail)
+                choices.extend(excluded)
                 excluded.clear()
             else:
                 chosen_email = mail_choice.get()
@@ -71,7 +70,7 @@ class MainWindow(tk.Tk):
                      f"{deleted_mail} emails successfully removed", susses=True)
 
         # connection status message and mail count field
-        status = tk.Label()
+        status = tk.Label(self)
         load_button = ttk.Button(
             status, text="Load Emails",
             width=15, command=lambda: load_email(choices))
@@ -86,7 +85,6 @@ class MainWindow(tk.Tk):
         # deletion and read mail section filed
         excluded = []
         choices = []
-        sender_count = {}
         mail_choice = tk.StringVar()
         delete_frame = tk.Label(self, text="Delete Emails", font=(
             self.font, 15), borderwidth=5, border=5)
@@ -101,7 +99,13 @@ class MainWindow(tk.Tk):
             delete_frame, text="Clear Excluded", command=clear_choice)
 
         # text filed for message displaying
-        message_filed = tk.Text(self, font=(self.font, 15), width=72)
+        message_filed = tk.Label(self, font=(self.font, 25))
+
+        # progress tracing label
+        progress = tk.Label(self)
+        progress_text = tk.Label(progress, font=(self.font, 15))
+        progress_bar = ttk.Progressbar(
+            progress, orient="horizontal", length=500, mode="determinate")
 
         # status and info placement
         status.grid(row=0, column=0)
@@ -118,5 +122,10 @@ class MainWindow(tk.Tk):
         exclude_button.grid(row=0, column=2, padx=5)
         clear_button.grid(row=0, column=3)
 
-        # text filed and message placement
+        # message, errors and warnings field
         message_filed.grid(row=2, column=0, columnspan=10)
+
+        # progress and state placement, containment label is
+        # placed as the email counting loop is initiated
+        progress_bar.grid(row=0, column=0)
+        progress_text.grid(row=0, column=1, padx=5)
