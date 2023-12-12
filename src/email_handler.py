@@ -89,7 +89,6 @@ def list_emails(service, query=None) -> list:
 def load_user_emails(service, list_mails: list, progress_bar: ttk.Progressbar,
                      text_progress: tkinter.Label, parent_widget: tkinter.Label,
                      output_field: tkinter.Label) -> dict:
-
     """ Loads all messages from the mailbox in to the app memory
     Args:
         service (object) Gmail auth service object
