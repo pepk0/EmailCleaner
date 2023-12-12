@@ -34,8 +34,8 @@ class MainWindow(tk.Tk):
                 excluded.append(chosen_email)
                 choices.remove(chosen_email)
                 get_mail['values'] = list(choices)
-                print_tw(message_filed, f"Emails from: {chosen_email} "
-                         f"are now excluded\nExcluded senders: {len(excluded)}")
+                print_tw(message_filed, f"Excluded senders: {len(excluded)}\n"
+                         f"Emails from: {chosen_email} are now excluded.")
             else:
                 print_tw(message_filed, "None selected!", error=True)
 
@@ -80,8 +80,7 @@ class MainWindow(tk.Tk):
         mail_count = tk.Label(
             status, text=f"Emails: {self.mail_count}", font=(self.font, 12))
         if not self.service:
-            status_text = tk.Label(
-                status, text="Offline", font=(self.font, 12))
+            status_text["text"] = "Offline"
 
         # deletion and read mail section filed
         excluded = []
