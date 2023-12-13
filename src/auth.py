@@ -1,26 +1,30 @@
 import os
 import pickle
-# Gmail API utils
+
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from googleapiclient.errors import HttpError
 
 
-# Request all access (permission to read/send/receive emails, manage the inbox, and more)
+# Request all access 
 SCOPES = ['https://mail.google.com/']
 PERSONAL_EMAIL = 'popovstz@gmail.com'
 
 
 def gmail_authenticate() -> object:
+    """ Authenticates the user, so he can use the Gmail API
+    Args:
+        None
+    Returns:
+        GoogleClient object: object which calls the Gmail API service 
+    """
     creds = None
-    # the file token.pickle stores the user's access and refresh tokens, and is
-    # created automatically when the authorization flow completes for the first time
     if os.path.exists("token.pickle"):
         with open("token.pickle", "rb") as token:
             creds = pickle.load(token)
     
-    # if there are no (valid) credentials availablle, let the user log in.
+    # if there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
@@ -34,5 +38,5 @@ def gmail_authenticate() -> object:
             pickle.dump(creds, token)
     try:
         return build('gmail', 'v1', credentials=creds)
-    except HttpError or FileNotFoundError:
+    except HttpError:
         return False
