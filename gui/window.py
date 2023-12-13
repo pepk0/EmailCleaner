@@ -40,10 +40,13 @@ class MainWindow(tk.Tk):
                 print_tw(message_filed, "None selected!", error=True)
 
         def clear_choice() -> None:
-            choices.extend(excluded)
-            excluded.clear()
-            get_mail['values'] = list(choices)
-            print_tw(message_filed, f"Excluded list cleared!", susses=True)
+            if excluded:
+                choices.extend(excluded)
+                excluded.clear()
+                get_mail['values'] = list(choices)
+                print_tw(message_filed, "Excluded list cleared!", susses=True)
+            else:
+                print_tw(message_filed, "Excluded list is empty!", error=True)
 
         def delete() -> None:
             deleted_mail = 0
