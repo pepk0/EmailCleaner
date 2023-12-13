@@ -49,13 +49,10 @@ def get_sender(service, mail_id: str) -> str:
             userId="me", id=mail_id, format="full").execute()
     except (HttpError, AttributeError):
         return sender
-    payload = sender.get("payload")
-    headers = payload.get("headers")
-    for header in headers:
-        if header["name"] == "From":
+    for header in sender["payload"]["headers"]:
+        if "From" == header["name"]:
             return header["value"]
-    else:
-        return sender
+    return sender
 
 
 def list_emails(service, query=None) -> list:
