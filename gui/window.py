@@ -10,7 +10,7 @@ class MainWindow(tk.Tk):
     def __init__(self,) -> None:
         super().__init__()
         self.title("Pidgin")
-        self.geometry("800x300")
+        self.geometry("800x250")
         self.font = "Helvetica"
         self.resizable(False, False)
         self.service = gmail_authenticate()
@@ -24,7 +24,7 @@ class MainWindow(tk.Tk):
                 loaded_emails = load_user_emails(
                     self.service, self.list_mails, progress_bar, progress_text,
                     progress, message_filed)
-                choices.extend([mail for mail in loaded_emails.keys()])
+                choices.extend([mail for mail in loaded_emails])
                 get_mail["values"] = choices
 
         def add_excluded() -> None:
@@ -93,7 +93,7 @@ class MainWindow(tk.Tk):
         delete_frame = tk.Frame(self)
         get_mail = ttk.Combobox(
             delete_frame, textvariable=mail_choice, state="readonly",
-            values=list(choices), width=40, font=(self.font, 14))
+            values=list(choices), width=40, font=(self.font, 15))
         delete_button = ttk.Button(
             delete_frame, text="Delete", width=10, command=delete)
         exclude_button = ttk.Button(delete_frame, text="Exclude",
@@ -120,10 +120,10 @@ class MainWindow(tk.Tk):
         # delete frame placement
         delete_frame.grid(row=1, column=0, pady=20)
         # inside delete frame placement
-        get_mail.grid(row=0, column=0,  pady=7)
-        delete_button.grid(row=0, column=1)
-        exclude_button.grid(row=0, column=2, padx=5)
-        clear_button.grid(row=0, column=3)
+        get_mail.grid(row=0, column=0,  pady=7, padx=3)
+        delete_button.grid(row=0, column=1, padx=3)
+        exclude_button.grid(row=0, column=2, padx=3)
+        clear_button.grid(row=0, column=3, padx=3)
 
         # message, errors and warnings field
         message_filed.grid(row=2, column=0)

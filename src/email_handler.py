@@ -85,7 +85,7 @@ def list_emails(service, query=None) -> list:
 
 def load_user_emails(service, list_mails: list, progress_bar: ttk.Progressbar,
                      text_progress: tkinter.Label, parent_widget: tkinter.Frame,
-                     output_field: tkinter.Label) -> dict:
+                     output_field: tkinter.Label) -> set:
     """ Loads all messages from the mailbox in to the app memory
     Args:
         service (object) Gmail auth service object
@@ -96,7 +96,7 @@ def load_user_emails(service, list_mails: list, progress_bar: ttk.Progressbar,
     Returns:
         dict: all the senders and the count of mails from them
     """
-    mails_as_dict = {}
+    email_senders_set = set()
     total_emails = len(list_mails)
     progress_increment = 100 / total_emails
     parent_widget.grid(row=2, column=0)
@@ -105,13 +105,10 @@ def load_user_emails(service, list_mails: list, progress_bar: ttk.Progressbar,
         text_progress["text"] = f"({iteration}/{total_emails})"
         progress_bar.update()
         text_progress.update()
-        email_sender = get_sender(service, email)
-        if email_sender not in mails_as_dict:
-            mails_as_dict[email_sender] = 0
-        mails_as_dict[email_sender] += 1
+        email_senders_set.add(get_sender(service, email))
     parent_widget.grid_forget()
     print_tw(output_field, "Successfully loaded senders!", susses=True)
-    return mails_as_dict
+    return email_senders_set
 
 
 def batch_delete(service, mail_id: str) -> int:
