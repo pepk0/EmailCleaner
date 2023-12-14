@@ -50,7 +50,6 @@ class MainWindow(tk.Tk):
 
         def delete() -> None:
             deleted_mail = 0
-            bar_progress = 100 / (len(choices) - len(excluded))
             if excluded:
                 for email_id in choices:
                     if email_id not in excluded:
