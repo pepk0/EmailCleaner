@@ -7,7 +7,17 @@
  - Deleting all emails except emails from a list of specific senders  
 **WARNING: Messages will be PERMANENTLY deleted!!**
 
-## App Demo
+## App Workflow
+
+ - ### Load Email Senders  
+    > loads all the email senders that have sent a email to you.
+  ![load_email](https://i.imgur.com/INuXL8B.gif)
+ - ### Delete
+   > Chose a email sender from whom all emails are gonna be deleted.
+  ![delete_email](https://i.imgur.com/BcwXbca.gif)    
+ - ### Exclude Delete
+    > Chose a sender or senders whom emails are gonna be ignored and all other emails are going to be deleted.
+    ![exclude_delete](https://i.imgur.com/QJ0HOAm.gif)
 
  ## Outside App Requirements
   - Python 3.10.7 or greater
