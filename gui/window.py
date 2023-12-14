@@ -74,7 +74,7 @@ class MainWindow(tk.Tk):
                      susses=True)
 
         # connection status message and mail count field
-        status = tk.Label(self)
+        status = tk.Frame(self)
         load_button = ttk.Button(
             status, text="Load Emails",
             width=15, command=lambda: load_email(choices))
@@ -89,8 +89,7 @@ class MainWindow(tk.Tk):
         excluded = []
         choices = []
         mail_choice = tk.StringVar()
-        delete_frame = tk.Label(self, text="Delete Emails", font=(
-            self.font, 15), borderwidth=5, border=5)
+        delete_frame = tk.Frame(self)
         get_mail = ttk.Combobox(
             delete_frame, textvariable=mail_choice, state="readonly",
             values=list(choices), width=40, font=(self.font, 14))
@@ -105,7 +104,7 @@ class MainWindow(tk.Tk):
         message_filed = tk.Label(self, font=(self.font, 18), wraplength=750)
 
         # progress tracing label
-        progress = tk.Label(self)
+        progress = tk.Frame(self)
         progress_text = tk.Label(progress, font=(self.font, 15))
         progress_bar = ttk.Progressbar(
             progress, orient="horizontal", length=500, mode="determinate")
