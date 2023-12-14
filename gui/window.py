@@ -50,10 +50,13 @@ class MainWindow(tk.Tk):
 
         def delete() -> None:
             deleted_mail = 0
+            bar_progress = 100 / (len(choices) - len(excluded))
             if excluded:
                 for email_id in choices:
                     if email_id not in excluded:
                         deleted_mail += batch_delete(self.service, email_id)
+                        progress_bar["value"] += bar_progress
+                        print_tw(progress_text, "Deleting email...")
                 # remove the deleted mail and replace it with the excluded
                 choices.clear()
                 choices.extend(excluded)
