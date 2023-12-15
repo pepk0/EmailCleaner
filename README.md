@@ -10,13 +10,13 @@
 ## App Workflow
 
  - ### Load Email Senders  
-    > loads all the email senders that have sent a email to you.
+    > Loads all emails, and gets their senders.
   ![load_email](https://i.imgur.com/INuXL8B.gif)
  - ### Delete
-   > Chose a email sender from whom all emails are gonna be deleted.
+   > From the dropdown you can select from all the people or organizations mailing you, after that clicking on delete will delete all the mail, they have sent.
   ![delete_email](https://i.imgur.com/BcwXbca.gif)    
  - ### Exclude Delete
-    > Chose a sender or senders whom emails are gonna be ignored and all other emails are going to be deleted.
+    > Chose a person or organization you wish to ignore, after that you can ignore more or click on delete witch will delete all the mail except the previously selected ones.
     ![exclude_delete](https://i.imgur.com/QJ0HOAm.gif)
 
  ## Outside App Requirements
@@ -30,9 +30,9 @@ Follow these [instructions](https://developers.google.com/gmail/api/quickstart/p
 
 ## Installation
 
+- Put the json file, you got after making the google dev account, in to the app directory and rename it to credentials.json
 - Create a virtual environment:
 - Install requirements.txt.
-- Copy the json file from Gmail API in to the repository directory.
 
 ## Run The App
 - Activate the virtual environment.
