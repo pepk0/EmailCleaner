@@ -10,14 +10,14 @@
 ## App Workflow
 
  - ### Load Email Senders  
-    > Loads all emails, and gets their senders.
-  ![load_email](https://i.imgur.com/gNqmZmA.gif)
+Loads all emails, and gets their senders.
+![load_email](https://i.imgur.com/gNqmZmA.gif)
  - ### Delete
-   > From the dropdown you can select from all the people or organizations mailing you, after that clicking on delete will delete all the mail, they have sent.
+  From the dropdown you can select from all the people or organizations mailing you, after that clicking on delete will delete all the mail, they have sent.
   ![delete_email](https://i.imgur.com/ceRKqV9.gif)    
  - ### Exclude Delete
-    > Chose a person or organization you wish to ignore, after that you can ignore more or click on delete witch will delete all the mail except the previously selected ones.
-    ![exclude_delete](https://i.imgur.com/YANQ4zu.gif)
+ Chose a person or organization you wish to ignore, after that you can ignore more or click on delete witch will delete all the mail except the previously selected ones. 
+ ![exclude_delete](https://i.imgur.com/YANQ4zu.gif)
 
  ## Outside App Requirements
   - Python 3.10.7 or greater
