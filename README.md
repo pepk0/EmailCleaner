@@ -5,7 +5,6 @@
 
  - Deleting all emails from a perticular sender.
  - Deleting all emails except emails from a list of specific senders  
-**WARNING: Messages will be PERMANENTLY deleted!!**
 
 ## App Workflow
 
@@ -13,11 +12,14 @@
     Loads all emails, and gets their senders.
     ![load_email](https://i.imgur.com/gNqmZmA.gif)
  - ### Delete
-    From the dropdown you can select from all the people or organizations mailing you, after that clicking on delete will delete all the mail, they have sent.
+    From the dropdown you can view all the people or organizations mailing you, after selecting a particular mail sender you can click the delete button to delete all the emails from them.
     ![delete_email](https://i.imgur.com/ceRKqV9.gif)    
  - ### Exclude Delete
-    Chose a person or organization you wish to ignore, after that you can ignore more or click on delete witch will delete all the mail except the previously selected ones. 
+    Chose a person or organization you wish to add to the excluded list, the by clicking on delete all the mail except the mail from the senders in that list will be deleted.
     ![exclude_delete](https://i.imgur.com/YANQ4zu.gif)
+
+
+### All messages are **PERMANENTLY** deleted and are not moved to trash box!
 
  ## Outside App Requirements
   - Python 3.10.7 or greater
