@@ -1,7 +1,5 @@
 # Pidgin
-
-## About this Project
- This is a bulk email deleting project made to clear cluttered email inboxes. Providing the following options:
+ This is a bulk email deleting project, using the Gmail API, made to clear cluttered email inboxes. Providing the following options:
 
  - Deleting all emails from a perticular sender.
  - Deleting all emails except emails from a list of specific senders  
@@ -9,7 +7,7 @@
 ## App Workflow
 
  - ### Load Email Senders  
-    Loads all emails, and gets their senders.
+    Iterates over every email and loads its sender in to the choice box.
     ![load_email](https://i.imgur.com/gNqmZmA.gif)
  - ### Delete
     From the dropdown you can view all the people or organizations mailing you, after selecting a particular mail sender you can click the delete button to delete all the emails from them.
