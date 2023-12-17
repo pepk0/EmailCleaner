@@ -87,7 +87,7 @@ class MainWindow(tk.Tk):
 
         # deletion mail section filed
         excluded = []
-        choices = []
+        choices = []  # must be empty for load_emails function to work
         mail_choice = tk.StringVar()
         delete_frame = tk.Frame(self)
         get_mail = ttk.Combobox(
