@@ -95,7 +95,7 @@ def load_user_emails(service, list_mails: list, progress_bar: ttk.Progressbar,
         all the other widgets such as text and bar
         output_field (Label) reference to the widget displaying messages
     Returns:
-        dict: all the senders and the count of mails from them
+        set: all the senders and the count of mails from them
     """
     email_senders_set = set()
     total_emails = len(list_mails)
