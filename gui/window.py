@@ -85,7 +85,7 @@ class MainWindow(tk.Tk):
         if not self.service:
             status_text["text"] = "Offline"
 
-        # deletion and read mail section filed
+        # deletion mail section filed
         excluded = []
         choices = []
         mail_choice = tk.StringVar()
