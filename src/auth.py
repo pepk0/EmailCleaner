@@ -9,6 +9,7 @@ from googleapiclient.errors import HttpError
 # If modifying these scopes, delete the file token.json.
 SCOPES = ['https://mail.google.com/']
 
+
 def gmail_authenticate():
     """Shows basic usage of the Gmail API.
     Lists the user's Gmail labels.
