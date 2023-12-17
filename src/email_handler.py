@@ -91,7 +91,8 @@ def load_user_emails(service, list_mails: list, progress_bar: ttk.Progressbar,
         service (object) Gmail auth service object
         progress_bar (Progressbar) reference to the progress bar widget
         text_progress (Label) reference to the text displaying widget
-        parent_widget (Frame) reference to the parent widget holding the bar and text label
+        parent_widget (Frame) reference to the parent widget holding 
+        all the other widgets such as text and bar
         output_field (Label) reference to the widget displaying messages
     Returns:
         dict: all the senders and the count of mails from them
