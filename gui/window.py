@@ -10,7 +10,7 @@ class MainWindow(tk.Tk):
     def __init__(self,) -> None:
         super().__init__()
         self.title("Pidgin")
-        self.geometry("800x250")
+        self.geometry("800x260")
         self.font = "Helvetica"
         self.resizable(False, False)
         self.service = gmail_authenticate()
