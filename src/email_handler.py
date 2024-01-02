@@ -46,7 +46,9 @@ def get_sender(service, mail_id: str) -> str:
     sender = "Unknown"
     try:
         sender = service.users().messages().get(
-            userId="me", id=mail_id, format="full").execute()
+            userId="me", 
+            id=mail_id, 
+            format="full").execute()
     except (HttpError, AttributeError):
         return sender
     for header in sender["payload"]["headers"]:
@@ -133,7 +135,8 @@ def batch_delete(service, mail_id: str) -> int:
         messages = messages[1000:]
         try:
             service.users().messages().batchDelete(
-                userId="me", body={"ids": to_delete}).execute()
+                userId="me", 
+                body={"ids": to_delete}).execute()
             deleted_messages += len(to_delete)
         except (HttpError, AttributeError):
             continue
