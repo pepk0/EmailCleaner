@@ -98,7 +98,7 @@ class MainWindow(tk.Tk):
         exclude_button = ttk.Button(delete_frame, text="Exclude",
                                     width=10, command=add_excluded)
         clear_button = ttk.Button(
-            delete_frame, text="Clear Excluded", command=clear_choice) 
+            delete_frame, text="Clear Excluded", command=clear_choice)
 
         # text filed for message displaying
         message_filed = tk.Label(self, font=(self.font, 18), wraplength=750)
