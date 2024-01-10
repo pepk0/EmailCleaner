@@ -13,7 +13,7 @@
     From the dropdown menu you can view all the people or organizations who have mailed you, after selecting a particular mail sender you can click the delete button to delete all the emails from them.
     ![delete_email](https://i.imgur.com/ceRKqV9.gif)    
  - ### Exclude Delete
-    Chose a person or organization you wish to add to the excluded list(emails messages from them are gonna be ignored), then by clicking on the delete button all the mail except the mail from the senders in that list will be deleted.
+    Chose a person or organization you wish to add to the excluded list(emails messages from them are gonna be ignored), then by clicking on the delete button all the mail except the mail from the senders in that list will be deleted.  
     ![exclude_delete](https://i.imgur.com/YANQ4zu.gif)
 
 
