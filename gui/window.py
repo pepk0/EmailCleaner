@@ -1,15 +1,12 @@
 import tkinter as tk
-from tkinter import ttk
-from gui.display_text import print_tw
-
 from src.auth import gmail_authenticate
 from src.email_handler import *
 
 
 class MainWindow(tk.Tk):
-    def __init__(self,) -> None:
+    def __init__(self, ) -> None:
         super().__init__()
-        self.title("Pidgin")
+        self.title = self.title("Pidgin")
         self.geometry("800x260")
         self.font = "Helvetica"
         self.resizable(False, False)
@@ -19,13 +16,13 @@ class MainWindow(tk.Tk):
         self.list_mails = list_emails(self.service)
         self.mail_count = get_user_email_count(self.service)
 
-        def load_email(choices: list) -> None:
-            if not choices:
+        def load_email(_choices: list) -> None:
+            if not _choices:
                 loaded_emails = load_user_emails(
                     self.service, self.list_mails, progress_bar, progress_text,
                     progress, message_filed)
-                choices.extend([mail for mail in loaded_emails])
-                get_mail["values"] = choices
+                _choices.extend([mail for mail in loaded_emails])
+                get_mail["values"] = _choices
 
         def add_excluded() -> None:
             chosen_email = mail_choice.get()
@@ -34,7 +31,8 @@ class MainWindow(tk.Tk):
                 excluded.append(chosen_email)
                 choices.remove(chosen_email)
                 get_mail['values'] = list(choices)
-                print_tw(message_filed, f"Excluded senders: {len(excluded)}\n"
+                print_tw(message_filed,
+                         f"Excluded senders: {len(excluded)}\n"
                          f"Emails from: {chosen_email} are now excluded.")
             else:
                 print_tw(message_filed, "None selected!", error=True)
@@ -119,7 +117,7 @@ class MainWindow(tk.Tk):
         # delete frame placement
         delete_frame.grid(row=1, column=0, pady=20)
         # inside delete frame placement
-        get_mail.grid(row=0, column=0,  pady=7, padx=3)
+        get_mail.grid(row=0, column=0, pady=7, padx=3)
         delete_button.grid(row=0, column=1, padx=3)
         exclude_button.grid(row=0, column=2, padx=3)
         clear_button.grid(row=0, column=3, padx=3)
