@@ -112,7 +112,7 @@ def load_user_emails(service, list_mails: list, progress_bar: ttk.Progressbar,
         progress_bar.update()
         text_progress.update()
         email_senders_set.add(get_sender(service, email))
-    # removes the progress bar after its done
+    # removes the progress bar after it's done
     parent_widget.grid_forget()
     print_tw(output_field, "Successfully loaded senders!", susses=True)
     return email_senders_set
@@ -129,8 +129,8 @@ def batch_delete(service, mail_id: str) -> int:
     deleted_messages = 0
     messages = list_emails(service, mail_id)
     while messages:
-        # batch delete API cant delete more then 1k messages
-        # so wen need to split them accordingly
+        # batch delete API cant delete more than 1k messages,
+        # so we need to split them accordingly
         to_delete = messages[:1000]
         messages = messages[1000:]
         try:
