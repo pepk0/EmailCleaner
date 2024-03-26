@@ -41,7 +41,7 @@ def get_sender(service, mail_id: str) -> str:
         service (object) Gmail auth service object
         mail_id (str) ID string of the desired message
     Returns:
-        str: the senders name and email address
+        str: the sender name and email address
     """
     sender = "Unknown"
     try:
@@ -61,7 +61,7 @@ def list_emails(service, query=None) -> list:
     """ Gets all messages matching a query
     Args:
         service (object) Gmail auth service object
-        query (str)(optional) name and email of sender
+        query (str) (optional) name and email of sender
     Returns:
         list: all message id's matching the query if specified
         else of all messages
