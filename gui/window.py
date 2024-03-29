@@ -4,7 +4,7 @@ from src.email_handler import *
 
 
 class MainWindow(tk.Tk):
-    def __init__(self, ) -> None:
+    def __init__(self) -> None:
         super().__init__()
         self.title = self.title("Email Cleaner")
         self.geometry("800x260")
