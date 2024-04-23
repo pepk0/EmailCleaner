@@ -1,6 +1,8 @@
 import tkinter as tk
 from src.auth import gmail_authenticate
 from src.email_handler import *
+from gui.selection_frame import SelectionFrame
+from gui.load_mail_frame import LoadMailFrame
 
 
 class MainWindow(tk.Tk):
@@ -15,6 +17,8 @@ class MainWindow(tk.Tk):
         self.user = get_user_email(self.service)
         self.list_mails = list_emails(self.service)
         self.mail_count = get_user_email_count(self.service)
+        self.selection_frame = SelectionFrame()
+        self.load_mail_frame = LoadMailFrame()
 
         def load_email(_choices: list) -> None:
             if not _choices:
@@ -108,19 +112,21 @@ class MainWindow(tk.Tk):
             progress, orient="horizontal", length=500, mode="determinate")
 
         # status and info placement
-        status.grid(row=0, column=0)
+        self.load_mail_frame.grid(row=0, column=0)
+        # status.grid(row=0, column=0)
         # inside status frame placement
-        status_text.grid(row=0, column=0)
-        mail_count.grid(row=0, column=1, padx=50)
-        load_button.grid(row=0, column=2)
+        # status_text.grid(row=0, column=0)
+        # mail_count.grid(row=0, column=1, padx=50)
+        # load_button.grid(row=0, column=2)
 
+        self.selection_frame.grid(row=1, column=0, pady=20)
         # delete frame placement
-        delete_frame.grid(row=1, column=0, pady=20)
+        # delete_frame.grid(row=1, column=0, pady=20)
         # inside delete frame placement
-        get_mail.grid(row=0, column=0, pady=7, padx=3)
-        delete_button.grid(row=0, column=1, padx=3)
-        exclude_button.grid(row=0, column=2, padx=3)
-        clear_button.grid(row=0, column=3, padx=3)
+        # get_mail.grid(row=0, column=0, pady=7, padx=3)
+        # delete_button.grid(row=0, column=1, padx=3)
+        # exclude_button.grid(row=0, column=2, padx=3)
+        # clear_button.grid(row=0, column=3, padx=3)
 
         # message, errors and warnings field
         message_filed.grid(row=2, column=0)
