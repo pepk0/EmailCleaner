@@ -2,7 +2,7 @@ import tkinter as tk
 from src.auth import gmail_authenticate
 from src.email_handler import *
 from gui.selection_frame import SelectionFrame
-from gui.load_mail_frame import LoadMailFrame
+from gui.message_dispaly import MessageDisplay
 
 
 class MainWindow(tk.Tk):
@@ -18,15 +18,20 @@ class MainWindow(tk.Tk):
         self.list_mails = list_emails(self.service)
         self.mail_count = get_user_email_count(self.service)
         self.selection_frame = SelectionFrame()
-        self.load_mail_frame = LoadMailFrame()
+        self.message_frame = MessageDisplay()
 
-        def load_email(_choices: list) -> None:
-            if not _choices:
-                loaded_emails = load_user_emails(
-                    self.service, self.list_mails, progress_bar, progress_text,
-                    progress, message_filed)
-                _choices.extend([mail for mail in loaded_emails])
-                get_mail["values"] = _choices
+        def load_email() -> None:
+            total_email_senders = set()
+            list_email = list_emails(self.service)
+            total_emails = len(list_email)
+            for iteration, email in enumerate(list_email, 1):
+                sender = get_sender(self.service, email)
+                percent = self.message_frame.status_bar(iteration,
+                                                        total_emails)
+                total_email_senders.add(sender)
+                message = f"Loading Emails...{percent}"
+                self.message_frame.display_text(message)
+            self.message_frame.display_text("Loading Mails Finished!", "green")
 
         def add_excluded() -> None:
             chosen_email = mail_choice.get()
@@ -79,7 +84,7 @@ class MainWindow(tk.Tk):
         status = tk.Frame(self)
         load_button = ttk.Button(
             status, text="Load Emails",
-            width=15, command=lambda: load_email(choices))
+            width=15, command=load_email)
         status_text = tk.Label(
             status, text=f"Connected as: {self.user}", font=(self.font, 12))
         mail_count = tk.Label(
@@ -112,12 +117,12 @@ class MainWindow(tk.Tk):
             progress, orient="horizontal", length=500, mode="determinate")
 
         # status and info placement
-        self.load_mail_frame.grid(row=0, column=0)
-        # status.grid(row=0, column=0)
+        # self.load_mail_frame.grid(row=0, column=0)
+        status.grid(row=0, column=0)
         # inside status frame placement
-        # status_text.grid(row=0, column=0)
-        # mail_count.grid(row=0, column=1, padx=50)
-        # load_button.grid(row=0, column=2)
+        status_text.grid(row=0, column=0)
+        mail_count.grid(row=0, column=1, padx=50)
+        load_button.grid(row=0, column=2)
 
         self.selection_frame.grid(row=1, column=0, pady=20)
         # delete frame placement
@@ -129,7 +134,8 @@ class MainWindow(tk.Tk):
         # clear_button.grid(row=0, column=3, padx=3)
 
         # message, errors and warnings field
-        message_filed.grid(row=2, column=0)
+        # message_filed.grid(row=2, column=0)
+        self.message_frame.grid(row=2, column=0)
 
         # progress and state placement, containment label is
         # placed as the email counting loop is initiated

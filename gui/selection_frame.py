@@ -36,6 +36,10 @@ class SelectionFrame(Frame):
         if not new_value_list:
             new_value_list = set()
         self.__email_senders = set(new_value_list)
+        self.get_mail_list["values"] = self.__email_senders
 
     def clear_excluded_list(self) -> None:
         self.__excluded_senders.clear()
+
+    def clear_choice_box(self) -> None:
+        self.get_mail_list.set(" ")
