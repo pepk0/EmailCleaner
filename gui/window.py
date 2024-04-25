@@ -26,12 +26,14 @@ class MainWindow(tk.Tk):
             total_emails = len(list_email)
             for iteration, email in enumerate(list_email, 1):
                 sender = get_sender(self.service, email)
-                percent = self.message_frame.status_bar(iteration,
-                                                        total_emails)
+                percent = self.message_frame.progres_tracker(iteration,
+                                                             total_emails)
                 total_email_senders.add(sender)
-                message = f"Loading Emails...{percent}"
+                message = f"Scanning Emails ... {percent}"
                 self.message_frame.display_text(message)
-            self.message_frame.display_text("Loading Mails Finished!", "green")
+            self.message_frame.display_text("Scanning Mails Finished!", "green")
+            self.selection_frame.load_option_choices()
+            self.selection_frame.update_choices(total_email_senders)
 
         def add_excluded() -> None:
             chosen_email = mail_choice.get()

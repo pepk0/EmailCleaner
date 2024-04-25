@@ -12,9 +12,9 @@ class MessageDisplay(Frame):
         self.text_output_field.grid(row=0, column=0)
 
     @staticmethod
-    def status_bar(curr_iteration: int, total_iterations: int) -> str:
+    def progres_tracker(curr_iteration: int, total_iterations: int) -> str:
         percent = (curr_iteration / total_iterations) * 100
-        return f"{percent:.2f}%"
+        return f"({curr_iteration} out of {total_iterations})"
 
     def display_text(self, text: str, color: str = "black") -> None:
         self.text_output_field["foreground"] = color
