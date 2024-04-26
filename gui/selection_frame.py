@@ -18,17 +18,17 @@ class SelectionFrame(Frame):
 
         self.get_option_list = ttk.Combobox(
             self, textvariable=self.option_choice, state="readonly",
-            values=["Scan Emails"], width=25, font=("Helvetica", 10))
+            values=["Scan Inbox"], width=25, font=("Helvetica", 10))
 
         # control buttons
-        self.clear_button = ttk.Button(self, text="Execute", width=13)
+        self.execute_button = ttk.Button(self, text="Execute", width=13)
 
         # packing all the buttons and dropdowns in the frame
         self.get_mail_list.grid(row=0, column=0, pady=7, padx=3)
         self.get_option_list.grid(row=0, column=1, padx=3)
-        self.clear_button.grid(row=0, column=2, padx=3)
+        self.execute_button.grid(row=0, column=2, padx=3)
 
-        self.get_option_list.set("Scan Emails")
+        self.get_option_list.set("Scan Inbox")
 
     def update_choices(self, new_senders: set) -> None:
         self.__email_senders = [x for x in new_senders]
