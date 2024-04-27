@@ -13,7 +13,7 @@ class MessageDisplay(Frame):
 
     @staticmethod
     def progres_tracker(curr_iteration: int, total_iterations: int) -> str:
-        percent = (curr_iteration / total_iterations) * 100
+        # percent = (curr_iteration / total_iterations) * 100
         return f"({curr_iteration} out of {total_iterations})"
 
     def display_text(self, text: str, color: str = "black") -> None:
