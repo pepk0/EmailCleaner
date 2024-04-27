@@ -30,23 +30,39 @@ class SelectionFrame(Frame):
 
         self.get_option_list.set("Scan Inbox")
 
+    def set_choices(self) -> None:
+        self.get_mail_list["values"] = self.__email_senders
+
     def update_choices(self, new_senders: set) -> None:
         self.__email_senders = [x for x in new_senders]
-        self.get_mail_list["values"] = self.__email_senders
+        self.set_choices()
+
+    def remove_from_mail_list(self, mail: str) -> None:
+        self.__email_senders.remove(mail)
+        self.set_choices()
+
+    def add_to_mail_list(self, mail: str) -> None:
+        self.__email_senders.append(mail)
+        self.set_choices()
 
     def clear_excluded_list(self) -> None:
         self.__excluded_senders.clear()
 
-    def clear_choice_box(self) -> None:
-        self.get_mail_list.set(" ")
+    def add_to_excluded_list(self, mail: str) -> None:
+        self.__excluded_senders.append(mail)
+
+    @property
+    def excluded_senders(self) -> list:
+        return self.__excluded_senders
 
     def load_option_choices(self) -> None:
         self.get_option_list.set(" ")
         self.get_option_list["values"] = self.OPTION_CHOICES
 
     def get_mail_choice(self) -> str:
+        mail_choice = self.mail_choice.get()
         self.mail_choice.set(" ")
-        return self.mail_choice.get()
+        return mail_choice
 
     def get_option(self) -> str:
         return self.option_choice.get()

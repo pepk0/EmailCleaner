@@ -87,5 +87,31 @@ class MailService:
                 messages.extend(result["messages"])
         return messages
 
-    def get_all_mail_ids(self) -> list:
-        return [x["id"] for x in self.list_emails()]
+    def batch_delete(self, mail_id: str) -> int:
+        """ PERMANENTLY deletes all emails from a particular sender
+        Args:
+            mail_id (str): the name and email of a sender
+        Returns:
+            int: count of all the messages deleted
+        """
+        deleted_messages = 0
+        messages = self.get_all_mail_ids(mail_id)
+        while messages:
+            # batch delete API cant delete more than 1k messages,
+            # so we need to split them accordingly
+            to_delete = messages[:1000]
+            messages = messages[1000:]
+            try:
+                self.service.users().messages().batchDelete(
+                    userId="me",
+                    body={"ids": to_delete}).execute()
+                deleted_messages += len(to_delete)
+            except (HttpError, AttributeError):
+                continue
+        return deleted_messages
+
+    def get_all_mail_ids(self, mail_id=None) -> list:
+        """Returns:
+            list[str]: a list with all the email id's
+        """
+        return [x["id"] for x in self.list_emails(mail_id)]
