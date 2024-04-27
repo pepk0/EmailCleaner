@@ -6,6 +6,7 @@ from gui.message_dispaly import MessageDisplay
 class MailFunctionality:
     def __init__(self) -> None:
         self.mail_service = MailService()
+        self.__function_mapping = {
             "Scan Inbox": self.__scan_emails,
             "Delete": self.__delete_single_mail,
             "Save": self.__save_email,
