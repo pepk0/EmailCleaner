@@ -11,7 +11,7 @@ class MailFunctionality:
             "Delete": self.__delete_single_mail,
             "Save": self.__save_email,
             "Clear Saved": self.__clear_saved_emails,
-            "Batch delete": self.__batch_delete,
+            "Batch Delete": self.__batch_delete,
         }
 
     def __scan_emails(self, selection: SelectionFrame,
@@ -62,6 +62,7 @@ class MailFunctionality:
         excluded_emails = selection.excluded_senders
         if not excluded_emails:
             display.display_text("Saved mail list is empty!", "red")
+            return
         for mail in excluded_emails:
             selection.add_to_mail_list(mail)
         selection.clear_excluded_list()
@@ -76,10 +77,10 @@ class MailFunctionality:
                 display.display_text(f"Deleting mail from {mail}")
                 deleted_mail += self.mail_service.batch_delete(mail)
                 selection.remove_from_mail_list(mail)
-            display.display_text(
-                f"Deleted a total of {deleted_mail} emails!", "green")
-            selection.update_choices(saved_emails)
-            selection.clear_excluded_list()
+        display.display_text(
+            f"Deleted a total of {deleted_mail} emails!", "green")
+        selection.update_choices(saved_emails)
+        selection.clear_excluded_list()
 
     def get_func(self, function: str):
         if not function or function not in self.__function_mapping:
