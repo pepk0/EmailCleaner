@@ -1,7 +1,7 @@
 import tkinter as tk
 from gui.selection_frame import SelectionFrame
 from gui.message_dispaly import MessageDisplay
-from gui.info_frame import InfoFrame
+from gui.info_frame import LoadMailFrame
 from src.mail_functionality import MailFunctionality
 
 
@@ -14,7 +14,7 @@ class MainWindow(tk.Tk):
         self.mail_functionality = MailFunctionality()
         self.selection_frame = SelectionFrame()
         self.message_frame = MessageDisplay()
-        self.info_frame = InfoFrame()
+        self.info_frame = LoadMailFrame()
 
         # Frame placement
         self.info_frame.grid(row=0, column=0)
@@ -27,6 +27,6 @@ class MainWindow(tk.Tk):
         func = self.mail_functionality.get_func(wanted_function)
         if func:
             func(self.selection_frame, self.message_frame)
-            self.info_frame.refresh_mail_count()
+            self.info_frame.refresh()
             return
         self.message_frame.display_text("Invalid option!", "red")

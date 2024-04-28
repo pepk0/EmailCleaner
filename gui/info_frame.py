@@ -2,22 +2,23 @@ from tkinter import Frame, Label
 from src.mail_service import MailService
 
 
-class InfoFrame(Frame):
+class LoadMailFrame(Frame):
+    FONT = "Helvetica"
+
     def __init__(self) -> None:
         super().__init__()
-        self.service = MailService()
-        self.user = self.service.get_user_email()
-        self.inbox = "N/A"
+        self.mail_service = MailService()
+        self.user: str = self.mail_service.get_user_email()
+        self.user_mail_count = "N/A"
 
-        self.user_label = Label(self, text=f"User: {self.user}",
-                                font=("Helvetica", 14))
-        self.inbox_label = Label(self, text=f"Inbox: {self.inbox}",
-                                 font=("Helvetica", 14))
+        self.user_label = Label(self, text=f"User:  {self.user}",
+                                font=(self.FONT, 12))
+        self.inbox = Label(self, text=f"Inbox:  {self.user_mail_count}",
+                           font=(self.FONT, 12))
 
-        # frame placement
         self.user_label.grid(row=0, column=0)
-        self.inbox_label.grid(row=0, column=1, padx=60)
+        self.inbox.grid(row=0, column=1, padx=50)
 
-    def refresh_mail_count(self) -> None:
-        self.inbox_label["text"] = \
-            f"Inbox: {self.service.get_user_email_count()}"
+    def refresh(self) -> None:
+        self.inbox["text"] = \
+            f"Inbox: {self.mail_service.get_user_email_count()}"
