@@ -10,8 +10,8 @@ class MailFunctionality:
             "Scan Inbox": self.__scan_emails,
             "Delete": self.__delete_single_mail,
             "Save": self.__save_email,
-            "Clear Saved": self.__clear_saved_emails,
             "Batch Delete": self.__batch_delete,
+            "Clear Saved": self.__clear_saved_emails,
         }
 
     def __scan_emails(self, selection: SelectionFrame,
