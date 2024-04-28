@@ -49,24 +49,24 @@ class MailFunctionality:
                      display: MessageDisplay) -> None:
         mail_to_save = selection.get_mail_choice()
         if not mail_to_save:
-            display.display_text("No Email selected!", "red")
+            display.display_text("No mails selected!", "red")
             return
         selection.add_to_excluded_list(mail_to_save)
         selection.remove_from_mail_list(mail_to_save)
         display.display_text(
-            f"Emails from {mail_to_save} are will be saved from deletion")
+            f"Emails from: {mail_to_save}, will be saved from deletion")
 
     @staticmethod
     def __clear_saved_emails(selection: SelectionFrame,
                              display: MessageDisplay) -> None:
         excluded_emails = selection.excluded_senders
         if not excluded_emails:
-            display.display_text("Saved mail list is empty!", "red")
+            display.display_text("No saved emails currently!", "red")
             return
         for mail in excluded_emails:
             selection.add_to_mail_list(mail)
         selection.clear_excluded_list()
-        display.display_text("Saved Emails Cleared!", "green")
+        display.display_text("Saved emails are now cleared!", "green")
 
     def __batch_delete(self, selection: SelectionFrame,
                        display: MessageDisplay) -> None:
@@ -79,8 +79,6 @@ class MailFunctionality:
                 selection.remove_from_mail_list(mail)
         display.display_text(
             f"Deleted a total of {deleted_mail} emails!", "green")
-        selection.update_choices(saved_emails)
-        selection.clear_excluded_list()
 
     def get_func(self, function: str):
         if not function or function not in self.__function_mapping:

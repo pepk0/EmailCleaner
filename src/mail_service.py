@@ -40,6 +40,34 @@ class MailService:
         except HttpError:
             return False
 
+    def get_user_email(self) -> str:
+        """ Gets the users email address
+        Args:
+        Returns:
+            str: email address
+        """
+        user_email = "Unknown"
+        try:
+            user_email_address = self.service.users().getProfile(
+                userId="me").execute()
+            return user_email_address.get("emailAddress")
+        except (HttpError, AttributeError):
+            return user_email
+
+    def get_user_email_count(self) -> int:
+        """ Gets the count of messages in the users mailbox
+        Args:
+        Returns:
+            int: count of messages in the mailbox
+        """
+        count = 0
+        try:
+            user_email_address = self.service.users().getProfile(
+                userId="me").execute()
+            return user_email_address.get("messagesTotal")
+        except (HttpError, AttributeError):
+            return count
+
     def get_sender(self, mail_id: str) -> str:
         """ Gets the sender of a particular email message
         Args:
