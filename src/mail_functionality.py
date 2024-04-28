@@ -32,7 +32,7 @@ class MailFunctionality:
                              display: MessageDisplay) -> None:
         mail_to_delete = selection.get_mail_choice()
         if not mail_to_delete:
-            display.display_text("No Mail selected!", "red")
+            display.display_text("No mails selected!", "red")
             return
         display.display_text(f"Deleting Emails ... from {mail_to_delete}")
         deleted_mail = self.mail_service.batch_delete(mail_to_delete)
