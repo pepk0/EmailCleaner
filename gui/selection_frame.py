@@ -33,7 +33,7 @@ class SelectionFrame(Frame):
     def set_choices(self) -> None:
         self.get_mail_list["values"] = self.__email_senders
 
-    def update_choices(self, new_senders: set) -> None:
+    def update_choices(self, new_senders: list | set) -> None:
         self.__email_senders = [x for x in new_senders]
         self.set_choices()
 
@@ -55,13 +55,17 @@ class SelectionFrame(Frame):
     def excluded_senders(self) -> list:
         return self.__excluded_senders
 
+    @property
+    def email_senders(self) -> list:
+        return self.__email_senders
+
     def load_option_choices(self) -> None:
         self.get_option_list.set(" ")
         self.get_option_list["values"] = self.OPTION_CHOICES
 
     def get_mail_choice(self) -> str:
         mail_choice = self.mail_choice.get()
-        self.mail_choice.set(" ")
+        self.mail_choice.set("")
         return mail_choice
 
     def get_option(self) -> str:

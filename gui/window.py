@@ -25,7 +25,10 @@ class MainWindow(tk.Tk):
         def execute():
             wanted_function = self.selection_frame.get_option()
             func = self.mail_functionality.get_func(wanted_function)
-            func(self.selection_frame, self.message_frame)
+            if func:
+                func(self.selection_frame, self.message_frame)
+                return
+            self.message_frame.display_text("Invalid option!", "red")
 
         def load_email() -> None:
             total_email_senders = set()
