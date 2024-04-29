@@ -33,7 +33,9 @@ class SelectionFrame(Frame):
     def set_choices(self) -> None:
         self.get_mail_list["values"] = self.__email_senders
 
-    def update_choices(self, new_senders: list | set) -> None:
+    def update_choices(self, new_senders=None, clear=False) -> None:
+        if clear and not new_senders:
+            new_senders = []
         self.__email_senders = [x for x in new_senders]
         self.set_choices()
 

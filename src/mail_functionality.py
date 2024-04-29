@@ -16,6 +16,7 @@ class MailFunctionality:
 
     def __scan_emails(self, selection: SelectionFrame,
                       display: MessageDisplay) -> None:
+        """Scans the email inbox, and gathers info about the emails"""
         total_emails = self.mail_service.get_all_mail_ids()
         len_emails = len(total_emails)
         mail_senders = set()
@@ -30,6 +31,7 @@ class MailFunctionality:
 
     def __delete_single_mail(self, selection: SelectionFrame,
                              display: MessageDisplay) -> None:
+        """Deletes a single mail that is selected"""
         mail_to_delete = selection.get_mail_choice()
         if not mail_to_delete:
             display.display_text("No mails selected!", "red")
@@ -47,6 +49,7 @@ class MailFunctionality:
     @staticmethod
     def __save_email(selection: SelectionFrame,
                      display: MessageDisplay) -> None:
+        """Saves a mail from deletion"""
         mail_to_save = selection.get_mail_choice()
         if not mail_to_save:
             display.display_text("No mails selected!", "red")
@@ -59,6 +62,7 @@ class MailFunctionality:
     @staticmethod
     def __clear_saved_emails(selection: SelectionFrame,
                              display: MessageDisplay) -> None:
+        """Removes all mail previously saved, making it deletable"""
         excluded_emails = selection.excluded_senders
         if not excluded_emails:
             display.display_text("No saved emails currently!", "red")
@@ -70,17 +74,18 @@ class MailFunctionality:
 
     def __batch_delete(self, selection: SelectionFrame,
                        display: MessageDisplay) -> None:
+        """Deletes all the mail except the mail in that is saved"""
         deleted_mail = 0
-        saved_emails = selection.excluded_senders.copy()
         for mail in selection.email_senders:
-            if mail not in saved_emails:
+            if mail not in selection.excluded_senders:
                 display.display_text(f"Deleting mail from {mail}")
                 deleted_mail += self.mail_service.batch_delete(mail)
-                selection.remove_from_mail_list(mail)
+        selection.update_choices(clear=True)
         display.display_text(
             f"Deleted a total of {deleted_mail} emails!", "green")
 
     def get_func(self, function: str):
+        """Returns a function based on the option selected"""
         if not function or function not in self.__function_mapping:
             return False
         return self.__function_mapping.get(function)
