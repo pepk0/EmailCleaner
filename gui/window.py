@@ -8,7 +8,7 @@ from src.mail_functionality import MailFunctionality
 class MainWindow(tk.Tk):
     def __init__(self) -> None:
         super().__init__()
-        self.title = self.title("Email Cleaner")
+        self.title("Email Cleaner")
         self.geometry("800x260")
         self.resizable(False, False)
 
@@ -33,7 +33,7 @@ class MainWindow(tk.Tk):
         wanted_function = self.selection_frame.get_option()
         func = self.mail_functionality.get_func(wanted_function)
         if func:
-            func(self.selection_frame, self.message_frame)
+            func(self.selection_frame, self.message_frame) 
             if wanted_function in mail_altering_functions:
                 self.info_frame.refresh()
             return
