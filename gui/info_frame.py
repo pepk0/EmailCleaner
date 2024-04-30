@@ -11,11 +11,13 @@ class InfoFrame(Frame):
         self.user: str = self.mail_service.get_user_email()
         self.user_mail_count = self.mail_service.get_user_email_count()
 
+        # labels that represent the text in the widget
         self.user_label = Label(self, text=f"User:  {self.user}",
                                 font=(self.FONT, 12))
         self.inbox = Label(self, text=f"Inbox:  {self.user_mail_count}",
                            font=(self.FONT, 12))
 
+        # placement of the labels
         self.user_label.grid(row=0, column=0)
         self.inbox.grid(row=0, column=1, padx=50)
 

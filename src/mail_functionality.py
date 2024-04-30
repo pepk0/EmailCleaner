@@ -86,6 +86,4 @@ class MailFunctionality:
 
     def get_func(self, function: str):
         """Returns a function based on the option selected"""
-        if not function or function not in self.__function_mapping:
-            return False
-        return self.__function_mapping.get(function)
+        return self.__function_mapping.get(function, False)
