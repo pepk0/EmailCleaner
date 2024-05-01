@@ -23,7 +23,7 @@ class MailFunctionality:
         for number, mail in enumerate(total_emails, 1):
             mail_sender = self.mail_service.get_sender(mail)
             mail_senders.add(mail_sender)
-            count = display.progres_tracker(number, len_emails)
+            count = display.progress_tracker(number, len_emails)
             display.display_text(f"Scanning Inbox ... {count}")
         selection.update_choices(mail_senders)
         selection.load_option_choices()
