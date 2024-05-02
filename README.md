@@ -1,42 +1,70 @@
 # EmailCleaner
- This is a bulk email deleting project, using the Gmail API, made to clear cluttered email inbox. Providing the following options:
 
- - Deleting all emails from a particular sender.
- - Deleting all emails except emails from a list of specific senders.  
+If you have a very cluttered email inbox or a mailbox
+overfilled with useless promotion emails,
+going through them one by one and deleting them is time-consuming and boring.
+That's why to help myself and others, I created this project,
+making the deletion of thousands of mail take no more than three clicks.
 
-## App Workflow
+# Demo
 
- - ### Load Email Senders  
-    Iterates over every email and loads its sender in to the choice box.
-    ![load_email](https://i.imgur.com/gNqmZmA.gif)
- - ### Delete
-    From the dropdown menu you can view all the people or organizations who have mailed you, after selecting a particular mail sender you can click the deleted button to delete all the emails from them.
-    ![delete_email](https://i.imgur.com/ceRKqV9.gif)    
- - ### Exclude Delete
-    Choose a person or organization you wish to add to the excluded list (emails messages from them are gonna be ignored), then by clicking on the deleted button; all the mail except the mail from the senders in that list will be deleted.  
-    ![exclude_delete](https://i.imgur.com/YANQ4zu.gif)
+![Project Demo](https://i.imgur.com/7bPqJ57.gif)
+> All messages are **PERMANENTLY** deleted and are not moved to trash box!
 
+# How to use
 
-### All messages are **PERMANENTLY** deleted and are not moved to trash box!
+On the project GUI, from left to right, there are three main widgets:
 
- ## Outside App Requirements
-  - Python 3.10.7 or greater
-  - The pip package management tool  
-  - A Google account with Gmail enabled
-  - A Google Cloud project    
+1. Email selection dropdown
+2. Option selection dropdown
+3. Execute button
+
+**Email selection dropdown**  
+This is used to select the organizations or people messagin you.
+All emails from them are automatically selected from them.
+
+**Option selection dropdown**  
+This is used to select options for the mail those include:
+
+- Scan Inbox - the first and only option, when opening the app,
+  after scanning the inbox, more option will appear.
+- Delete - this option lets you delete all the mail from a single sender or
+  organization, which needs to be selected from the mail selection dropdown.
+- Save - this option saves an email from batch deletion,
+  which needs to be selected from the mail selection dropdown.
+- Batch Delete - this option lets you delete all emails that are in the mail
+  selection dropdown menu, except the ones that are saved.
+- Clear Saved - this option lets you clear the saved senders making them
+  present in the mail selection menu thus making them deletable again.
+
+**Execute Button**  
+This button when clicked will execute the command in the option menu dropdown.
+
+> The GUI has a message display field that will give instruction and
+> information or error messages, making the project usage more straight forward.
+
+## Outside App Requirements
+
+- Python 3.10.7 or greater
+- The pip package management tool
+- A Google account with Gmail enabled
+- A Google Cloud project
 
 ## Managing Gmail API
-Follow these [instructions](https://developers.google.com/gmail/api/quickstart/python#step_1_turn_on_the_api_name).
+
+Follow
+these [instructions](https://developers.google.com/gmail/api/quickstart/python#step_1_turn_on_the_api_name).
 
 ## Installation
 
-- After completing the Gmail developer account and downloading the json file, rename it to credentials.json and put it in the app directory.
+- After completing the Gmail developer account and downloading the json file,
+  rename it to credentials.json and put it in the app directory.
 - Create a virtual environment.
 - Activate the virtual environment.
 - Install requirements.txt **(Make sure the virtual environment is activated!)**
 
 ## Run The App
-- Activate the virtual environment.
+
 - Run main.py
 
     
