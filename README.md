@@ -31,8 +31,8 @@ includes the following:
   after scanning the inbox, more option will appear.
 - Delete - this option lets you delete all the mail from a single sender or
   organization, which needs to be selected from the mail selection dropdown.
-- Save - this option saves an email from batch deletion,
-  which needs to be selected from the mail selection dropdown.
+- Save - this option saves a sender's or organization's mails from batch
+  deletion, which needs to be selected from the mail selection dropdown.
 - Batch Delete - this option lets you delete all emails that are in the mail
   selection dropdown menu, except the ones that are saved.
 - Clear Saved - this option lets you clear the saved senders making them
