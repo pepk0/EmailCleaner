@@ -14,6 +14,19 @@ class MailFunctionality:
             "Clear Saved": self.__clear_saved_emails,
         }
 
+    @staticmethod
+    def __clear_saved_emails(selection: SelectionFrame,
+                             display: MessageDisplay) -> None:
+        """Removes all mail previously saved, making it deletable"""
+        excluded_emails = selection.excluded_senders
+        if not excluded_emails:
+            display.display_text("No saved emails currently!", "red")
+            return
+        for mail in excluded_emails:
+            selection.add_to_mail_list(mail)
+        selection.clear_excluded_list()
+        display.display_text("Saved emails are now cleared!", "green")
+
     def __scan_emails(self, selection: SelectionFrame,
                       display: MessageDisplay) -> None:
         """Scans the email inbox, and gathers info about the emails"""
@@ -59,19 +72,6 @@ class MailFunctionality:
         display.display_text(
             f"Emails from: {mail_to_save}, will be saved from deletion")
 
-    @staticmethod
-    def __clear_saved_emails(selection: SelectionFrame,
-                             display: MessageDisplay) -> None:
-        """Removes all mail previously saved, making it deletable"""
-        excluded_emails = selection.excluded_senders
-        if not excluded_emails:
-            display.display_text("No saved emails currently!", "red")
-            return
-        for mail in excluded_emails:
-            selection.add_to_mail_list(mail)
-        selection.clear_excluded_list()
-        display.display_text("Saved emails are now cleared!", "green")
-
     def __batch_delete(self, selection: SelectionFrame,
                        display: MessageDisplay) -> None:
         """Deletes all the mail except the mail in that is saved"""
@@ -89,4 +89,4 @@ class MailFunctionality:
         Returns:
             function: A function corresponding to the action desired
         """
-        return self.__function_mapping.get(function, False)
+        return self.__function_mapping[function]
