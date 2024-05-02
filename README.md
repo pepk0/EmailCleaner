@@ -33,8 +33,9 @@ includes the following:
   organization, which needs to be selected from the mail selection dropdown.
 - Save - this option saves a sender's or organization's mails from batch
   deletion, which needs to be selected from the mail selection dropdown.
-- Batch Delete - this option lets you delete all emails that are in the mail
-  selection dropdown menu, except the ones that are saved.
+- Batch Delete - this option lets you delete all emails from senders or
+organizations that are in the mail selection dropdown menu,
+except the ones that are saved.
 - Clear Saved - this option lets you clear the saved senders making them
   present in the mail selection menu thus making them deletable again.
 
