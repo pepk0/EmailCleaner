@@ -24,7 +24,8 @@ This is used to select the organizations or people messagin you.
 All emails from them are automatically selected.
 
 **Option selection dropdown**  
-This is used to select options for the mail those include:
+This is used to select an options from an option list that
+includes the following:
 
 - Scan Inbox - the first and only option, when opening the app,
   after scanning the inbox, more option will appear.
