@@ -21,7 +21,7 @@ On the project GUI, from left to right, there are three main widgets:
 
 **Email selection dropdown**  
 This is used to select the organizations or people messagin you.
-All emails from them are automatically selected from them.
+All emails from them are automatically selected.
 
 **Option selection dropdown**  
 This is used to select options for the mail those include:
