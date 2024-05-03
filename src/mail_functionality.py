@@ -1,6 +1,6 @@
 from src.mail_service import MailService
 from gui.selection_frame import SelectionFrame
-from gui.message_dispaly import MessageDisplay
+from gui.message_display import MessageDisplay
 
 
 class MailFunctionality:

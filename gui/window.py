@@ -1,6 +1,6 @@
 import tkinter as tk
 from gui.selection_frame import SelectionFrame
-from gui.message_dispaly import MessageDisplay
+from gui.message_display import MessageDisplay
 from gui.info_frame import InfoFrame
 from src.mail_functionality import MailFunctionality
 
