@@ -6,12 +6,12 @@ going through them one by one and deleting them is time-consuming and boring.
 That's why to help myself and others, I created this project,
 making the deletion of thousands of mail take no more than three clicks.
 
-# Demo
+## Demo
 
 ![Project Demo](https://i.imgur.com/7bPqJ57.gif)
 > All messages are **PERMANENTLY** deleted and are not moved to trash box!
 
-# How to use
+## How to use
 
 On the project GUI, from left to right, there are three main widgets:
 
@@ -27,16 +27,16 @@ All emails from them are automatically selected.
 This is used to select an options from an option list that
 includes the following:
 
-- Scan Inbox - the first and only option, when opening the app,
+- *Scan Inbox*: The first and only option, when opening the app,
   after scanning the inbox, more option will appear.
-- Delete - this option lets you delete all the mail from a single sender or
+- *Delete*: This option lets you delete all the mail from a single sender or
   organization, which needs to be selected from the mail selection dropdown.
-- Save - this option saves a sender's or organization's mails from batch
+- *Save*: This option saves a sender's or organization's mails from batch
   deletion, which needs to be selected from the mail selection dropdown.
-- Batch Delete - this option lets you delete all emails from senders or
+- *Batch Delete*: This option lets you delete all emails from senders or
 organizations that are in the mail selection dropdown menu,
 except the ones that are saved.
-- Clear Saved - this option lets you clear the saved senders making them
+- *Clear Saved*: This option lets you clear the saved senders making them
   present in the mail selection menu thus making them deletable again.
 
 **Execute Button**  
@@ -63,7 +63,7 @@ these [instructions](https://developers.google.com/gmail/api/quickstart/python#s
   rename it to credentials.json and put it in the app directory.
 - Create a virtual environment.
 - Activate the virtual environment.
-- Install requirements.txt **(Make sure the virtual environment is activated!)**
+- Install requirements.txt
 
 ## Run The App
 
