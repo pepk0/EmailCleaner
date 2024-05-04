@@ -3,8 +3,8 @@
 If you have a very cluttered email inbox or a mailbox
 overfilled with useless promotion emails,
 going through them one by one and deleting them is time-consuming and boring.
-That's why to help myself and others, I created this project,
-making the deletion of thousands of mail take no more than three clicks.
+That's why to help myself and others, I created this project that uses the Gmail
+API to make the deletion of thousands of mail take no more than three clicks.
 
 ## Demo
 
@@ -34,8 +34,8 @@ includes the following:
 - *Save*: This option saves a sender's or organization's mails from batch
   deletion, which needs to be selected from the mail selection dropdown.
 - *Batch Delete*: This option lets you delete all emails from senders or
-organizations that are in the mail selection dropdown menu,
-except the ones that are saved.
+  organizations that are in the mail selection dropdown menu,
+  except the ones that are saved.
 - *Clear Saved*: This option lets you clear the saved senders making them
   present in the mail selection menu thus making them deletable again.
 
