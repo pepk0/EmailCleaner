@@ -5,6 +5,7 @@ overfilled with useless promotion emails,
 going through them one by one and deleting them is time-consuming and boring.
 That's why to help myself and others, I created this project that uses the Gmail
 API to make the deletion of thousands of mail take no more than three clicks.
+> This application works only for Gmail.
 
 ## Demo
 
