@@ -28,6 +28,8 @@ class MailService:
                 try:
                     creds.refresh(Request())
                 except RefreshError:
+                    # if the token is expired, we need to delete it and go
+                    # through the youth process from the browser again
                     os.remove("token.json")
                     raise SystemExit
             else:
