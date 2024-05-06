@@ -25,13 +25,15 @@ class MailService:
         # If there are no (valid) credentials available, let the user log in.
         if not creds or not creds.valid:
             if creds and creds.expired and creds.refresh_token:
-                try:
-                    creds.refresh(Request())
-                except RefreshError:
-                    # if the token is expired, we need to delete it and go
-                    # through the youth process from the browser again
-                    os.remove("token.json")
-                    raise SystemExit
+                creds_expired = True
+                while creds_expired:
+                    try:
+                        creds.refresh(Request())
+                        creds_expired = False
+                    except RefreshError:
+                        # if the token is expired, we need to delete it and go
+                        # through the youth process from the browser again
+                        os.remove("token.json")
             else:
                 flow = InstalledAppFlow.from_client_secrets_file(
                     "credentials.json", self.SCOPES
