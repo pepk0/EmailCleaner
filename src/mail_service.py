@@ -27,12 +27,12 @@ class MailService:
             if creds and creds.expired and creds.refresh_token:
                 creds_expired = True
                 while creds_expired:
+                    # if the token is expired, we delete it and regen a new one,
+                    # by going over the auth screen again
                     try:
                         creds.refresh(Request())
                         creds_expired = False
                     except RefreshError:
-                        # if the token is expired, we need to delete it and go
-                        # through the youth process from the browser again
                         os.remove("token.json")
             else:
                 flow = InstalledAppFlow.from_client_secrets_file(
