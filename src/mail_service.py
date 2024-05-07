@@ -124,15 +124,15 @@ class MailService:
                 messages.extend(result["messages"])
         return messages
 
-    def batch_delete(self, mail_id: str) -> int:
+    def batch_delete(self, sender_name: str) -> int:
         """ PERMANENTLY deletes all emails from a particular sender
         Args:
-            mail_id (str): the name and email of a sender
+            sender_name (str): the name and email of a sender
         Returns:
             int: count of all the messages deleted
         """
         deleted_messages = 0
-        messages = self.get_all_mail_ids(mail_id)
+        messages = self.get_all_mail_ids(sender_name)
         while messages:
             # batch delete API cant delete more than 1k messages,
             # so we need to split them accordingly
@@ -147,8 +147,8 @@ class MailService:
                 continue
         return deleted_messages
 
-    def get_all_mail_ids(self, mail_id=None) -> list:
+    def get_all_mail_ids(self, sender=None) -> list:
         """Returns:
             list[str]: a list with all the email id's
         """
-        return [x["id"] for x in self.list_emails(mail_id)]
+        return [x["id"] for x in self.list_emails(sender)]
