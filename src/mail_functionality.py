@@ -76,7 +76,7 @@ class MailFunctionality:
                        display: MessageDisplay) -> None:
         """Deletes all the mail except the mail in that is saved"""
         deleted_mail = 0
-        selection.get_mail_list.set(" ")
+        selection.get_mail_list.set("")
         for mail in selection.email_senders:
             if mail not in selection.excluded_senders:
                 display.display_text(f"Deleting mail from {mail}")
