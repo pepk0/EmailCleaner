@@ -86,7 +86,7 @@ class MailFunctionality:
             f"Deleted a total of {deleted_mail} emails!", "green")
 
     def get_func(self, function: str):
-        """Returns a function based on the option selected
+        """Selects a function from a mapping corresponding to a desired action
         Returns:
             function: A function corresponding to the action desired
         """
