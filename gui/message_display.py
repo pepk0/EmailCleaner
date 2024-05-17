@@ -2,11 +2,10 @@ from tkinter import Frame, Label
 
 
 class MessageDisplay(Frame):
-    FONT = "Helvetica"
 
-    def __init__(self) -> None:
+    def __init__(self, font: str) -> None:
         super().__init__()
-        self.text_output_field = Label(self, font=(self.FONT, 18),
+        self.text_output_field = Label(self, font=(font, 18),
                                        wraplength=750)
 
         self.text_output_field.grid(row=0, column=0)

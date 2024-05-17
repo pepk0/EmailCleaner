@@ -4,7 +4,7 @@ from tkinter import StringVar, Frame, ttk
 class SelectionFrame(Frame):
     OPTION_CHOICES: list = ["Delete", "Save", "Batch Delete", "Clear Saved"]
 
-    def __init__(self) -> None:
+    def __init__(self, font: str) -> None:
         super().__init__()
         self.mail_choice: StringVar = StringVar()
         self.option_choice: StringVar = StringVar()
@@ -14,12 +14,12 @@ class SelectionFrame(Frame):
         # dropdown list for all the email senders
         self.get_mail_list = ttk.Combobox(
             self, textvariable=self.mail_choice, state="readonly",
-            values=self.__email_senders, width=40, font=("Helvetica", 15))
+            values=self.__email_senders, width=40, font=(font, 15))
 
         # dropdown for the options
         self.get_option_list = ttk.Combobox(
             self, textvariable=self.option_choice, state="readonly",
-            values=["Scan Inbox"], width=25, font=("Helvetica", 10))
+            values=["Scan Inbox"], width=25, font=(font, 10))
 
         # control button
         self.execute_button = ttk.Button(self, text="Execute", width=13)
@@ -29,6 +29,8 @@ class SelectionFrame(Frame):
         self.get_option_list.grid(row=0, column=1, padx=3)
         self.execute_button.grid(row=0, column=2, padx=3)
 
+        # sets the initial value to Scan Inbox witch is the only option,
+        # since we need to have emails to conduct operations on them
         self.get_option_list.set("Scan Inbox")
 
     @property
@@ -86,7 +88,7 @@ class SelectionFrame(Frame):
 
     def load_option_choices(self) -> None:
         """Loads the options in to the option drop down menu."""
-        self.get_option_list.set(" ")
+        self.get_option_list.set("")
         self.get_option_list["values"] = self.OPTION_CHOICES
 
     def get_mail_choice(self) -> str:
@@ -96,7 +98,6 @@ class SelectionFrame(Frame):
             dropdown as blank.
         """
         mail_choice = self.mail_choice.get()
-        self.mail_choice.set("")
         return mail_choice
 
     def get_option(self) -> str:
@@ -104,4 +105,7 @@ class SelectionFrame(Frame):
         Returns:
             (str) the option selected from the option dropdown menu.
         """
-        return self.option_choice.get()
+        option = self.option_choice.get()
+        if option == "Scan Inbox":
+            self.get_option_list.set("")
+        return option if option else "-1"

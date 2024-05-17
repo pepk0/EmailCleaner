@@ -3,9 +3,8 @@ from src.mail_service import MailService
 
 
 class InfoFrame(Frame):
-    FONT = "Helvetica"
 
-    def __init__(self) -> None:
+    def __init__(self, font: str) -> None:
         super().__init__()
         self.mail_service = MailService()
         self.user: str = self.mail_service.get_user_email()
@@ -13,9 +12,9 @@ class InfoFrame(Frame):
 
         # labels that represent the text in the widget
         self.user_label = Label(self, text=f"User:  {self.user}",
-                                font=(self.FONT, 12))
+                                font=(font, 12))
         self.inbox = Label(self, text=f"Inbox:  {self.user_mail_count}",
-                           font=(self.FONT, 12))
+                           font=(font, 12))
 
         # placement of the labels
         self.user_label.grid(row=0, column=0)

@@ -3,6 +3,7 @@ from gui.selection_frame import SelectionFrame
 from gui.message_display import MessageDisplay
 from gui.info_frame import InfoFrame
 from src.mail_functionality import MailFunctionality
+from settings.settings import FONT
 
 
 class MainWindow(tk.Tk):
@@ -14,9 +15,9 @@ class MainWindow(tk.Tk):
 
         # all the frames making up the app interface
         self.mail_functionality = MailFunctionality()
-        self.selection_frame = SelectionFrame()
-        self.message_frame = MessageDisplay()
-        self.info_frame = InfoFrame()
+        self.selection_frame = SelectionFrame(font=FONT)
+        self.message_frame = MessageDisplay(font=FONT)
+        self.info_frame = InfoFrame(font=FONT)
 
         # adds the execute function to the button on the selection frame
         self.selection_frame.execute_button["command"] = self.execute
@@ -28,12 +29,12 @@ class MainWindow(tk.Tk):
 
     def execute(self) -> None:
         """Gets the option from the user
-        and returns the corresponding functionality"""
+        and executes the corresponding functionality"""
         mail_altering_functions = {"Delete", "Batch Delete"}
         wanted_function = self.selection_frame.get_option()
-        func = self.mail_functionality.get_func(wanted_function)
-        if func:
-            func(self.selection_frame, self.message_frame) 
+        if wanted_function != "-1":
+            func = self.mail_functionality.get_func(wanted_function)
+            func(self.selection_frame, self.message_frame)
             if wanted_function in mail_altering_functions:
                 self.info_frame.refresh()
             return
