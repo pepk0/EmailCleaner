@@ -98,9 +98,10 @@ class SelectionFrame(Frame):
             dropdown as blank.
         """
         mail_choice = self.mail_choice.get()
+        self.mail_choice.set("")
         return mail_choice
 
-    def get_option(self) -> str:
+    def get_option(self) -> str | None:
         """Gets the option selected from the user.
         Returns:
             (str) the option selected from the option dropdown menu.
@@ -108,4 +109,4 @@ class SelectionFrame(Frame):
         option = self.option_choice.get()
         if option == "Scan Inbox":
             self.get_option_list.set("")
-        return option if option else "-1"
+        return option if option else None

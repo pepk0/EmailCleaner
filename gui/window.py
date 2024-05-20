@@ -32,7 +32,7 @@ class MainWindow(tk.Tk):
         and executes the corresponding functionality"""
         mail_altering_functions = {"Delete", "Batch Delete"}
         wanted_function = self.selection_frame.get_option()
-        if wanted_function != "-1":
+        if wanted_function:
             func = self.mail_functionality.get_func(wanted_function)
             func(self.selection_frame, self.message_frame)
             if wanted_function in mail_altering_functions:
