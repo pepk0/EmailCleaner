@@ -13,7 +13,8 @@ class MainWindow(tk.Tk):
         self.geometry("800x260")
         self.resizable(False, False)
 
-        # this holds and maps the functions to the options
+        # this class holds and a mapping of the functions
+        # that correspond to the options
         self.mail_functionality = MailFunctionality()
 
         # all the frames making up the app interface
