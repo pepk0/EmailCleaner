@@ -31,8 +31,7 @@ class MainWindow(tk.Tk):
         self.message_frame.grid(row=2, column=0)
 
     def execute(self) -> None:
-        """Gets the option from the user
-        and executes the corresponding functionality"""
+        """Executes the chosen option from the user"""
         mail_altering_functions = {"Delete", "Batch Delete"}
         wanted_function = self.selection_frame.get_option()
         if wanted_function:
