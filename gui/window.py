@@ -18,9 +18,9 @@ class MainWindow(tk.Tk):
         self.mail_functionality = MailFunctionality()
 
         # all the frames making up the app interface
-        self.selection_frame = SelectionFrame(font=FONT)
-        self.message_frame = MessageDisplay(font=FONT)
-        self.info_frame = InfoFrame(font=FONT)
+        self.selection_frame = SelectionFrame(FONT)
+        self.message_frame = MessageDisplay(FONT)
+        self.info_frame = InfoFrame(FONT)
 
         # adds the execute function to the button on the selection frame
         self.selection_frame.execute_button["command"] = self.execute
